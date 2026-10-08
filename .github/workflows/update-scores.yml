@@ -1,0 +1,40 @@
+name: Update PandaScore data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pandascore-score-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Fetch PandaScore scores
+        env:
+          PANDASCORE_TOKEN: ${{ secrets.PANDASCORE_TOKEN }}
+          PANDASCORE_SERIES_ID: ${{ vars.PANDASCORE_SERIES_ID }}
+        run: python3 scripts/update_scores.py
+
+      - name: Commit data.json if it changed
+        run: |
+          if git diff --quiet -- data.json; then
+            echo "No score changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git commit -m "Auto-update PandaScore scores"
+          git push
