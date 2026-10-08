@@ -1,6 +1,11 @@
 {
-  "updated_at": null,
+  "updated_at": "2026-10-08T22:22:38.147905Z",
   "source": "PandaScore",
-  "series": null,
+  "series": {
+    "id": 11014,
+    "name": "",
+    "full_name": "2026",
+    "year": 2026
+  },
   "matches": []
 }
