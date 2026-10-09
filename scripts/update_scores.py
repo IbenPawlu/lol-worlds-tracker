@@ -135,7 +135,9 @@ def main():
         )
 
     normalized = [normalize_match(m) for m in matches]
-    normalized = [m for m in normalized if len(m["opponents"]) == 2]
+    ready = sum(1 for m in normalized if len(m["opponents"]) == 2)
+    pending = len(normalized) - ready
+    print(f"Fetched {len(normalized)} total matches: {ready} with two opponents, {pending} pending opponent assignment.")
 
     payload = {
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
