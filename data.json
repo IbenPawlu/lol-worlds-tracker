@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-10T18:16:13.318319Z",
+  "updated_at": "2026-10-10T22:16:57.129604Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -11,7 +11,7 @@
     {
       "id": 1710926,
       "slug": "2026-10-15-89bfb48a-3f09-430b-bd93-0434e0c079f6",
-      "name": "Upper Bracket Semifinal 1: TBD vs TBD",
+      "name": "Upper Bracket Semifinal 1: FUR vs MVK",
       "status": "not_started",
       "begin_at": "2026-10-15T18:00:00Z",
       "end_at": null,
@@ -33,12 +33,27 @@
         "name": "Play-In",
         "slug": "league-of-legends-world-championship-2026-play-in"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 126688,
+          "name": "FURIA Esports",
+          "acronym": "FUR",
+          "slug": "furia-uppercut",
+          "score": 0
+        },
+        {
+          "id": 137803,
+          "name": "MVK Esports",
+          "acronym": "MVK",
+          "slug": "mvk-esports",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710927,
       "slug": "2026-10-16-21922592-9982-4403-a712-bd3d41e8bea2",
-      "name": "Upper Bracket Semifinal 2: TBD vs TBD",
+      "name": "Upper Bracket Semifinal 2: C9 vs KC",
       "status": "not_started",
       "begin_at": "2026-10-15T23:00:00Z",
       "end_at": null,
@@ -60,7 +75,22 @@
         "name": "Play-In",
         "slug": "league-of-legends-world-championship-2026-play-in"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 1097,
+          "name": "Cloud9",
+          "acronym": "C9",
+          "slug": "cloud9",
+          "score": 0
+        },
+        {
+          "id": 134078,
+          "name": "Karmine Corp",
+          "acronym": "KC",
+          "slug": "karmine-corp-academy",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710930,
