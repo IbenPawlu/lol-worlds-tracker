@@ -755,12 +755,12 @@
       },
       swissLineup:[
         "GEN","HLE","T1","DK",
-        "AL","BLG","TES",
+        "AL","BLG","TES","IG",
         "G2","MKOI",
         "TL","LYON",
         "TSW","CFO",
         "LØS",
-        null,null
+        null
       ],
       swissStatus:{}
     };
@@ -1179,6 +1179,13 @@
     if(!Array.isArray(fixtures.swissLineup)) fixtures.swissLineup=structuredClone(defaultFixtures.swissLineup);
     if(fixtures.swissLineup.length<16) fixtures.swissLineup=fixtures.swissLineup.concat(Array(16-fixtures.swissLineup.length).fill(null));
     if(fixtures.swissLineup.length>16) fixtures.swissLineup=fixtures.swissLineup.slice(0,16);
+
+    // Migration: IG is a direct Swiss-stage team. Older builds accidentally
+    // omitted it from the preset lineup, leaving two TBD slots.
+    if(!fixtures.swissLineup.includes('IG')){
+      const emptySwissSlot=fixtures.swissLineup.findIndex(x=>!x);
+      if(emptySwissSlot!==-1) fixtures.swissLineup[emptySwissSlot]='IG';
+    }
     if(!fixtures.swissStatus || typeof fixtures.swissStatus!=='object') fixtures.swissStatus={};
 
     const swissFixtureShape={
