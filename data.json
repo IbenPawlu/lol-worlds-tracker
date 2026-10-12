@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-12T12:51:34.807356Z",
+  "updated_at": "2026-10-12T21:37:09.912739Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -9,53 +9,11 @@
   },
   "matches": [
     {
-      "id": 1710926,
-      "slug": "2026-10-15-89bfb48a-3f09-430b-bd93-0434e0c079f6",
-      "name": "Upper Bracket Semifinal 1: FUR vs MVK",
-      "status": "not_started",
-      "begin_at": "2026-10-15T18:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 5,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22046,
-        "name": "Play-In",
-        "slug": "league-of-legends-world-championship-2026-play-in"
-      },
-      "opponents": [
-        {
-          "id": 126688,
-          "name": "FURIA Esports",
-          "acronym": "FUR",
-          "slug": "furia-uppercut",
-          "score": 0
-        },
-        {
-          "id": 137803,
-          "name": "MVK Esports",
-          "acronym": "MVK",
-          "slug": "mvk-esports",
-          "score": 0
-        }
-      ]
-    },
-    {
       "id": 1710927,
       "slug": "2026-10-16-21922592-9982-4403-a712-bd3d41e8bea2",
       "name": "Upper Bracket Semifinal 2: C9 vs KC",
       "status": "not_started",
-      "begin_at": "2026-10-15T23:00:00Z",
+      "begin_at": "2026-10-15T18:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -88,6 +46,48 @@
           "name": "Karmine Corp",
           "acronym": "KC",
           "slug": "karmine-corp-academy",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1710926,
+      "slug": "2026-10-15-89bfb48a-3f09-430b-bd93-0434e0c079f6",
+      "name": "Upper Bracket Semifinal 1: FUR vs MVK",
+      "status": "not_started",
+      "begin_at": "2026-10-15T23:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 5,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22046,
+        "name": "Play-In",
+        "slug": "league-of-legends-world-championship-2026-play-in"
+      },
+      "opponents": [
+        {
+          "id": 126688,
+          "name": "FURIA Esports",
+          "acronym": "FUR",
+          "slug": "furia-uppercut",
+          "score": 0
+        },
+        {
+          "id": 137803,
+          "name": "MVK Esports",
+          "acronym": "MVK",
+          "slug": "mvk-esports",
           "score": 0
         }
       ]
