@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-15T22:00:31.690878Z",
+  "updated_at": "2026-10-15T22:51:24.606971Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -12,10 +12,10 @@
       "id": 1710927,
       "slug": "2026-10-16-21922592-9982-4403-a712-bd3d41e8bea2",
       "name": "Upper Bracket Semifinal 2: C9 vs KC",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-15T18:20:58Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-15T22:48:48Z",
+      "winner_id": 134078,
       "number_of_games": 5,
       "league": {
         "id": 297,
@@ -46,7 +46,7 @@
           "name": "Karmine Corp",
           "acronym": "KC",
           "slug": "karmine-corp-academy",
-          "score": 2
+          "score": 3
         }
       ]
     },
@@ -94,8 +94,8 @@
     },
     {
       "id": 1710930,
-      "slug": "2026-10-16-bda30dc5-5f62-4207-9f4f-88d09b59c727",
-      "name": "Upper Bracket Final: TBD vs TBD",
+      "slug": "2026-10-16-20470171-59e6-418b-baf2-4eba6ac459a2",
+      "name": "Upper Bracket Final: KC vs TBD",
       "status": "not_started",
       "begin_at": "2026-10-16T18:00:00Z",
       "end_at": null,
@@ -117,12 +117,20 @@
         "name": "Play-In",
         "slug": "league-of-legends-world-championship-2026-play-in"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 134078,
+          "name": "Karmine Corp",
+          "acronym": "KC",
+          "slug": "karmine-corp-academy",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710928,
-      "slug": "2026-10-17-0d855930-1730-4b2a-ad27-1c2fe1038804",
-      "name": "Lower Bracket Semifinal: TBD vs TBD",
+      "slug": "2026-10-17-2036c93e-02f5-4637-b6f9-8452b7431399",
+      "name": "Lower Bracket Semifinal: C9 vs TBD",
       "status": "not_started",
       "begin_at": "2026-10-16T23:00:00Z",
       "end_at": null,
@@ -144,7 +152,15 @@
         "name": "Play-In",
         "slug": "league-of-legends-world-championship-2026-play-in"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 1097,
+          "name": "Cloud9",
+          "acronym": "C9",
+          "slug": "cloud9",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710929,
