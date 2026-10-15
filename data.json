@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-15T14:06:25.047453Z",
+  "updated_at": "2026-10-15T18:55:36.337818Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -12,8 +12,8 @@
       "id": 1710927,
       "slug": "2026-10-16-21922592-9982-4403-a712-bd3d41e8bea2",
       "name": "Upper Bracket Semifinal 2: C9 vs KC",
-      "status": "not_started",
-      "begin_at": "2026-10-15T18:00:00Z",
+      "status": "running",
+      "begin_at": "2026-10-15T18:20:58Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -39,7 +39,7 @@
           "name": "Cloud9",
           "acronym": "C9",
           "slug": "cloud9",
-          "score": 0
+          "score": 1
         },
         {
           "id": 134078,
