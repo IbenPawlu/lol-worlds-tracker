@@ -649,10 +649,15 @@
     .roster-coaches p{font-size:12px;line-height:1.65;margin:0}
     .roster-source{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;font-size:10px;color:var(--muted)}
     .roster-source a{text-decoration:underline;text-underline-offset:3px}
+
+    .match-schedule{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 9px;padding:7px 8px;color:#b9c2d0;font-size:10px;line-height:1.5;font-weight:600;text-align:center}
+    .swiss-match>.match-schedule{grid-column:1 / -1;width:100%;padding:2px 0 5px}
+    .match-live-badge{display:inline-flex;align-items:center;gap:4px;color:#75f5be;font-size:9px;font-weight:900;letter-spacing:.08em}
+    .match.is-live,.swiss-match.is-live,.ko-col .ko-match.is-live{border-color:#53e5ab;background:#16362d;box-shadow:inset 0 0 0 1px rgba(83,229,171,.5),0 0 16px rgba(83,229,171,.13)}
   </style>
 </head>
 <body>
-  <header class="nav"><div class="wrap nav-inner"><nav class="nav-links"><a href="#teams">Teams</a><a href="#playin">Play-In</a><a href="#swiss">Swiss</a><a href="#knockout">Knockout</a><span id="liveDataBadge" class="btn" style="pointer-events:none">Scores: loading…</span><span id="autoFixtureBadge" class="btn" style="pointer-events:none">Fixtures: waiting…</span><span id="adminModeBadge" class="btn admin-badge admin-only hidden">Admin mode</span><button id="exportBtn" class="btn admin-only hidden" type="button">Export index.html</button></nav></div></header>
+  <header class="nav"><div class="wrap nav-inner"><nav class="nav-links"><a href="#teams">Teams</a><a href="#playin">Play-In</a><a href="#swiss">Swiss</a><a href="#knockout">Knockout</a><span id="liveDataBadge" class="btn" style="pointer-events:none">Scores: loading…</span><span id="autoFixtureBadge" class="btn" style="pointer-events:none">Fixtures: waiting…</span><span class="muted" style="font-size:10px">Match times: your local timezone · LIVE reflects the latest feed update</span><span id="adminModeBadge" class="btn admin-badge admin-only hidden">Admin mode</span><button id="exportBtn" class="btn admin-only hidden" type="button">Export index.html</button></nav></div></header>
 
   <main>
     <section class="hero wrap">
@@ -786,6 +791,7 @@
       : structuredClone(publishedState?.fixtures || defaultFixtures);
 
     let liveScoreData={updated_at:null,matches:[]};
+    let fixtureMatchIds={playin:{},swiss:{},knockout:{}};
 
     function normTeamName(value){
       return String(value||'')
@@ -806,11 +812,13 @@
       return found?.short || null;
     }
 
-    function liveScoresForTeams(shortA,shortB){
+    function liveScoresForTeams(shortA,shortB,matchId){
+      if(matchId==null) return null;
       if(!shortA || !shortB || !Array.isArray(liveScoreData.matches)) return null;
       const pair=[shortA,shortB].sort().join('|');
 
       const candidates=liveScoreData.matches.filter(m=>{
+        if(String(m.id)!==String(matchId)) return false;
         if(!Array.isArray(m.opponents) || m.opponents.length!==2) return false;
         const resolved=m.opponents.map(trackerShortForOpponent);
         if(resolved.some(x=>!x)) return false;
@@ -828,7 +836,7 @@
       const scores={};
       for(const opp of match.opponents){
         const short=trackerShortForOpponent(opp);
-        if(short) scores[short]=Number.isFinite(Number(opp.score)) ? Number(opp.score) : null;
+        if(short) scores[short]=opp.score!=null && Number.isFinite(Number(opp.score)) ? Number(opp.score) : null;
       }
       if(!(shortA in scores) || !(shortB in scores)) return null;
 
@@ -841,6 +849,28 @@
       };
     }
 
+
+
+    function fixtureMatch(stage,key,index,shortA,shortB){
+      const id=fixtureMatchIds[stage]?.[key]?.[index];
+      const match=(liveScoreData.matches || []).find(m=>String(m.id)===String(id));
+      if(!match) return null;
+      const pair=liveMatchTeams(match);
+      // Do not attach another match's time or live state to a manual correction.
+      if(pair && ((shortA && !pair.includes(shortA)) || (shortB && !pair.includes(shortB)))) return null;
+      return match;
+    }
+
+    function matchSchedule(match){
+      const date=match?.begin_at ? new Date(match.begin_at) : null;
+      const valid=date && !Number.isNaN(date.getTime());
+      const running=String(match?.status || '').toLowerCase()==='running';
+      const time=valid
+        ? `<time datetime="${esc(date.toISOString())}" title="${esc(date.toUTCString())}">${esc(new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(date))}</time>`
+        : '<span>Time TBD</span>';
+      return `<div class="match-schedule">${running?'<span class="match-live-badge"><span aria-hidden="true">●</span> LIVE</span>':''}${time}</div>`;
+    }
+    const matchLiveClass=match=>String(match?.status || '').toLowerCase()==='running'?' is-live':'';
 
     function liveMatchTeams(match){
       if(!match || !Array.isArray(match.opponents) || match.opponents.length!==2) return null;
@@ -980,6 +1010,7 @@
       ];
       ordered.forEach((m,index)=>{
         const [key,pairIndex]=mapping[index];
+        if(m) (fixtureMatchIds.playin[key] ||= [])[pairIndex]=m.id;
         fillPair(fixtures.playin,key,pairIndex,liveMatchTeams(m));
       });
 
@@ -1024,6 +1055,8 @@
 
     function applySwissFixturesFromLive(matches){
       const ordered=[...matches].sort((a,b)=>matchTime(a)-matchTime(b));
+      const firstRound=ordered.filter(m=>/\bround\s*1\b/i.test(m.name || ''));
+      fixtureMatchIds.swiss['0-0']=firstRound.slice(0,8).map(m=>m.id);
       const records={};
       const bucketCounts={};
       Object.keys(fixtures.swiss).forEach(k=>bucketCounts[k]=0);
@@ -1042,7 +1075,9 @@
         if(!key) key=swissBucketForRecord(bRec.w,bRec.l);
 
         if(key){
-          const pairIndex=bucketCounts[key]++;
+          const roundOneIndex=key==='0-0'?firstRound.findIndex(m=>m.id===match.id):-1;
+          const pairIndex=roundOneIndex>=0?roundOneIndex:bucketCounts[key]++;
+          (fixtureMatchIds.swiss[key] ||= [])[pairIndex]=match.id;
           fillPair(fixtures.swiss,key,pairIndex,pair);
 
           if(key==='0-0'){
@@ -1082,6 +1117,10 @@
 
     function applyKnockoutFixturesFromLive(matches){
       const ordered=[...matches].sort((a,b)=>matchTime(a)-matchTime(b));
+
+      for(const [key,start,end] of [['qf',0,4],['sf',4,6],['final',6,7]]){
+        fixtureMatchIds.knockout[key]=ordered.slice(start,end).map(m=>m.id);
+      }
 
       // Direct fixture mapping when PandaScore already publishes both opponents.
       ordered.slice(0,4).forEach((m,i)=>fillPair(fixtures.knockout,'qf',i,liveMatchTeams(m)));
@@ -1149,6 +1188,7 @@
         return;
       }
 
+      fixtureMatchIds={playin:{},swiss:{},knockout:{}};
       const stages=classifyLiveStages();
       applyPlayinFixturesFromLive(stages.playin);
       persistPlayinScores(stages.playin);
@@ -1660,10 +1700,13 @@
     }
 
     function matchBox(a,b,pathA,pathB,scoreA,scoreB,scorePathA,scorePathB){
-      const live=liveScoresForTeams(a,b);
+      const dot=pathA.lastIndexOf('.');
+      const match=fixtureMatch('playin',pathA.slice(0,dot),Math.floor(Number(pathA.slice(dot+1))/2),a,b);
+      const live=liveScoresForTeams(a,b,match?.id);
       const shownA=live?.a ?? scoreA;
       const shownB=live?.b ?? scoreB;
-      return `<div class="match">
+      return `<div class="match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
+        ${matchSchedule(match)}
         <div class="slot">
           ${playinTeam(a,pathA,'left')}
           ${playinScoreMid(shownA,shownB,scorePathA,scorePathB)}
@@ -1852,6 +1895,7 @@
       for(let i=0;i<vals.length;i+=2){
         const a=vals[i] ? getTeam(vals[i]) : null;
         const b=vals[i+1] ? getTeam(vals[i+1]) : null;
+        const match=fixtureMatch('swiss',key,i/2,vals[i],vals[i+1]);
 
         const teamControl=(team,index)=>{
           return isAdmin
@@ -1862,7 +1906,7 @@
         };
 
         if(scored){
-          const live=liveScoresForTeams(vals[i],vals[i+1]);
+          const live=liveScoresForTeams(vals[i],vals[i+1],match?.id);
           const scoreA=live?.a ?? scores[i];
           const scoreB=live?.b ?? scores[i+1];
 
@@ -1884,13 +1928,15 @@
                  <span>${scoreB==null?'-':scoreB}</span>
                </div>`;
 
-          html += `<div class="swiss-match">
+          html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
+            ${matchSchedule(match)}
             <div class="slot-team">${teamControl(a,i)}</div>
             ${middle}
             <div class="slot-team">${teamControl(b,i+1)}</div>
           </div>`;
         }else{
-          html += `<div class="swiss-match">
+          html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
+            ${matchSchedule(match)}
             <div class="slot-team">${teamControl(a,i)}</div>
             <div class="vs">VS</div>
             <div class="slot-team">${teamControl(b,i+1)}</div>
@@ -1983,7 +2029,9 @@
     }
 
     function koRow(aShort,bShort,pathA,pathB,scoreKey,scoreIndex){
-      const live=liveScoresForTeams(aShort,bShort);
+      const dot=pathA.lastIndexOf('.');
+      const match=fixtureMatch('knockout',pathA.slice(0,dot),Math.floor(Number(pathA.slice(dot+1))/2),aShort,bShort);
+      const live=liveScoresForTeams(aShort,bShort,match?.id);
       const scoreA=live?.a ?? fixtures.knockout[scoreKey]?.[scoreIndex] ?? null;
       const scoreB=live?.b ?? fixtures.knockout[scoreKey]?.[scoreIndex+1] ?? null;
 
@@ -2005,7 +2053,8 @@
             <span>${scoreB==null?'-':scoreB}</span>
           </div>`;
 
-      return `<div class="ko-match">
+      return `<div class="ko-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
+        ${matchSchedule(match)}
         <div class="ko-slot">
           ${koSlot(aShort,pathA,'left')}
           ${middle}
