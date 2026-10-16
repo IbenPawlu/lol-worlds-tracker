@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T16:37:16.716062Z",
+  "updated_at": "2026-10-16T19:36:06.484823Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -96,8 +96,8 @@
       "id": 1710930,
       "slug": "karmine-corp-2026-10-16",
       "name": "Upper Bracket Final: MVK vs KC",
-      "status": "not_started",
-      "begin_at": "2026-10-16T18:00:00Z",
+      "status": "running",
+      "begin_at": "2026-10-16T18:06:01Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -130,7 +130,7 @@
           "name": "Karmine Corp",
           "acronym": "KC",
           "slug": "karmine-corp-academy",
-          "score": 0
+          "score": 2
         }
       ]
     },
