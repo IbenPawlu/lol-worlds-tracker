@@ -861,7 +861,7 @@
       all.forEach(m=>{
         const txt=liveMatchText(m);
         if(/play[\s_-]?in|playin/.test(txt)) explicit.playin.push(m);
-        else if(/swiss/.test(txt)) explicit.swiss.push(m);
+        else if(/swiss|group[\s_-]?stage/.test(txt)) explicit.swiss.push(m);
         else if(/quarter|semi|knockout|final/.test(txt)) explicit.knockout.push(m);
         else unclassified.push(m);
       });
@@ -934,9 +934,23 @@
       }
     }
 
+    function orderedPlayinMatches(matches){
+      const slots=Array(6).fill(null);
+      for(const match of matches){
+        const name=String(match.name || '').toLowerCase();
+        const index=/upper bracket semifinal 1/.test(name) ? 0
+          : /upper bracket semifinal 2/.test(name) ? 1
+          : /lower bracket semifinal/.test(name) ? 2
+          : /upper bracket final/.test(name) ? 3
+          : /lower bracket final/.test(name) ? 4
+          : /grand final/.test(name) ? 5 : -1;
+        if(index!==-1) slots[index]=match;
+      }
+      return slots;
+    }
+
     function applyPlayinFixturesFromLive(matches){
-      const ordered=[...matches].sort((a,b)=>matchTime(a)-matchTime(b));
-      const ready=ordered.filter(m=>liveMatchTeams(m));
+      const ordered=orderedPlayinMatches(matches);
 
       // Direct PandaScore fixture mapping when both opponents are known.
       const mapping=[
@@ -947,7 +961,7 @@
         ['r2lower',0],
         ['r3',0]
       ];
-      ready.slice(0,6).forEach((m,index)=>{
+      ordered.forEach((m,index)=>{
         const [key,pairIndex]=mapping[index];
         fillPair(fixtures.playin,key,pairIndex,liveMatchTeams(m));
       });
@@ -1051,12 +1065,11 @@
 
     function applyKnockoutFixturesFromLive(matches){
       const ordered=[...matches].sort((a,b)=>matchTime(a)-matchTime(b));
-      const ready=ordered.filter(m=>liveMatchTeams(m));
 
       // Direct fixture mapping when PandaScore already publishes both opponents.
-      ready.slice(0,4).forEach((m,i)=>fillPair(fixtures.knockout,'qf',i,liveMatchTeams(m)));
-      ready.slice(4,6).forEach((m,i)=>fillPair(fixtures.knockout,'sf',i,liveMatchTeams(m)));
-      ready.slice(6,7).forEach((m,i)=>fillPair(fixtures.knockout,'final',i,liveMatchTeams(m)));
+      ordered.slice(0,4).forEach((m,i)=>fillPair(fixtures.knockout,'qf',i,liveMatchTeams(m)));
+      ordered.slice(4,6).forEach((m,i)=>fillPair(fixtures.knockout,'sf',i,liveMatchTeams(m)));
+      ordered.slice(6,7).forEach((m,i)=>fillPair(fixtures.knockout,'final',i,liveMatchTeams(m)));
 
       // Persist scores and advance winners immediately.
       ordered.slice(0,4).forEach((m,i)=>{
@@ -1093,7 +1106,7 @@
 
 
     function persistPlayinScores(matches){
-      const ordered=[...matches].sort((a,b)=>matchTime(a)-matchTime(b));
+      const ordered=orderedPlayinMatches(matches);
       const map=[
         ['r1Scores',0],
         ['r1Scores',2],
