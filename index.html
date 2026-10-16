@@ -632,6 +632,23 @@
       justify-self:center !important;
     }
 
+
+    .team-grid{align-items:start}
+    .team:before{pointer-events:none}
+    .roster-toggle{position:relative;display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:12px;padding:8px 0 0;border:0;border-top:1px solid var(--line);background:none;color:var(--muted);font:inherit;font-size:11px;cursor:pointer;text-align:left}
+    .roster-toggle:focus-visible{outline:2px solid var(--cyan,#17d7ff);outline-offset:4px;border-radius:3px}
+    .roster-toggle span:last-child{color:#ffb7c4}
+    .team-roster{position:relative;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+    .team-roster[hidden]{display:none}
+    .roster-heading{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ffb7c4;margin:0 0 10px}
+    .roster-players{display:grid;gap:7px;margin:0}
+    .roster-row{display:flex;justify-content:space-between;gap:14px;font-size:12px}
+    .roster-row dt{color:var(--muted)}
+    .roster-row dd{margin:0;text-align:right;font-weight:700;overflow-wrap:anywhere}
+    .roster-coaches{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+    .roster-coaches p{font-size:12px;line-height:1.65;margin:0}
+    .roster-source{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;font-size:10px;color:var(--muted)}
+    .roster-source a{text-decoration:underline;text-underline-offset:3px}
   </style>
 </head>
 <body>
@@ -1240,10 +1257,295 @@
       $('#filters').querySelectorAll('button').forEach(btn => btn.addEventListener('click',()=>{region=btn.dataset.r;renderFilters();renderTeams();}));
     }
 
+
+    // Worlds 2026 roster snapshot, checked 2026-10-16.
+    // Players: GosuGamers Worlds team guide. Coaching staff: MID.GG Worlds guide.
+    const teamRosters={
+  "GEN": [
+    [
+      "Kiin",
+      "Canyon",
+      "Chovy",
+      "Ruler",
+      "Duro"
+    ],
+    [
+      "Ryu",
+      "Lyn",
+      "Nova"
+    ]
+  ],
+  "HLE": [
+    [
+      "Zeus",
+      "Kanavi",
+      "Zeka",
+      "Gumayusi",
+      "Delight"
+    ],
+    [
+      "Homme",
+      "Mowgli",
+      "Sin"
+    ]
+  ],
+  "T1": [
+    [
+      "Doran",
+      "Oner",
+      "Faker",
+      "Peyz",
+      "Keria"
+    ],
+    [
+      "Tom",
+      "Easyhoon",
+      "Mata"
+    ]
+  ],
+  "DK": [
+    [
+      "Siwoo",
+      "Lucid",
+      "ShowMaker",
+      "Smash",
+      "Career"
+    ],
+    [
+      "cvMax",
+      "PoohManDu",
+      "Hachani"
+    ]
+  ],
+  "AL": [
+    [
+      "Breathe",
+      "Tarzan",
+      "Shanks",
+      "Hope",
+      "Kael"
+    ],
+    [
+      "BigWei",
+      "Teacherma",
+      "Despa1r"
+    ]
+  ],
+  "BLG": [
+    [
+      "Bin",
+      "XUN",
+      "Knight",
+      "Viper",
+      "ON"
+    ],
+    [
+      "Daeny",
+      "Chieh",
+      "Ben",
+      "zyb"
+    ]
+  ],
+  "TES": [
+    [
+      "369",
+      "Tian",
+      "Creme",
+      "JackeyLove",
+      "Zhuo"
+    ],
+    [
+      "Poppy",
+      "BoBo",
+      "Leo"
+    ]
+  ],
+  "IG": [
+    [
+      "TheShy",
+      "Wei",
+      "Rookie",
+      "JiaQi",
+      "Meiko"
+    ],
+    [
+      "Kezman",
+      "Helper",
+      "Chengz",
+      "Fury"
+    ]
+  ],
+  "G2": [
+    [
+      "BrokenBlade",
+      "SkewMond",
+      "Caps",
+      "Hans Sama",
+      "Labrov"
+    ],
+    [
+      "Perkz",
+      "Memento",
+      "Rodrigo"
+    ]
+  ],
+  "MKOI": [
+    [
+      "Myrwn",
+      "Elyoya",
+      "jojopyun",
+      "Supa",
+      "Alvaro"
+    ],
+    [
+      "Melzhet",
+      "Alphari"
+    ]
+  ],
+  "KC": [
+    [
+      "Canna",
+      "Yike",
+      "kyeahoo",
+      "Caliste",
+      "Busio"
+    ],
+    [
+      "Reapered",
+      "Zeph"
+    ]
+  ],
+  "TL": [
+    [
+      "Morgan",
+      "Josedeodo",
+      "Quid",
+      "Yeon",
+      "CoreJJ"
+    ],
+    [
+      "Spawn",
+      "Spookz"
+    ]
+  ],
+  "LYON": [
+    [
+      "Dhokla",
+      "Inspired",
+      "Saint",
+      "Berserker",
+      "Isles"
+    ],
+    [
+      "Reignover",
+      "Rigby"
+    ]
+  ],
+  "C9": [
+    [
+      "Thanatos",
+      "Blaber",
+      "Loki",
+      "Tactical",
+      "Vulcan"
+    ],
+    [
+      "IWillDominate",
+      "Veigar v2",
+      "Arrow",
+      "YamatoCannon"
+    ]
+  ],
+  "TSW": [
+    [
+      "Pun",
+      "Hizto",
+      "Dire",
+      "Eddie",
+      "Bie"
+    ],
+    [
+      "WarHorse",
+      "Ciel"
+    ]
+  ],
+  "CFO": [
+    [
+      "Rest",
+      "Shad0w",
+      "Pout",
+      "Doggo",
+      "Kino"
+    ],
+    [
+      "Chawy",
+      "Wulala"
+    ]
+  ],
+  "MVK": [
+    [
+      "Kratos",
+      "Gury",
+      "Chika",
+      "Harky",
+      "SiuLoong"
+    ],
+    [
+      "SofM",
+      "BigKoro",
+      "Suga"
+    ]
+  ],
+  "LØS": [
+    [
+      "Zest",
+      "Curse",
+      "Feisty",
+      "Duduhh",
+      "Ackerman"
+    ],
+    [
+      "Enatron",
+      "Invokid",
+      "Brandão"
+    ]
+  ],
+  "FUR": [
+    [
+      "Guigo",
+      "Tatu",
+      "Tutsz",
+      "Ayu",
+      "Jojo"
+    ],
+    [
+      "furyz",
+      "Luuukz",
+      "Lanterninho"
+    ]
+  ]
+};
+    let pinnedRoster=null;
+    function rosterPanel(t){
+      const roster=teamRosters[t.short];
+      if(!roster) return '';
+      const roles=['Top','Jungle','Mid','Bot / ADC','Support'];
+      const id='roster-'+encodeURIComponent(t.short);
+      return `<button type="button" class="roster-toggle" aria-expanded="${pinnedRoster===t.short}" aria-controls="${id}" aria-label="${esc(t.name)} roster and coaches"><span>Players &amp; coaches</span><span aria-hidden="true">＋</span></button>
+        <section class="team-roster" id="${id}" aria-label="${esc(t.name)} roster" ${pinnedRoster===t.short?'':'hidden'}>
+          <h3 class="roster-heading">Worlds 2026 roster</h3>
+          <dl class="roster-players">${roster[0].map((name,i)=>`<div class="roster-row"><dt>${roles[i]}</dt><dd>${esc(name)}</dd></div>`).join('')}</dl>
+          ${t.short==='BLG'?'<div class="roster-row" style="margin-top:7px"><span class="muted">Top substitute</span><strong>Flandre</strong></div>':''}
+          ${t.short==='TES'?'<p class="meta" style="margin-top:10px">369 replaces ZUIAN pending visa clearance.</p>':''}
+          <div class="roster-coaches"><h3 class="roster-heading">Coaching staff</h3><p>${roster[1].map(esc).join(' · ')}</p></div>
+          <div class="roster-source"><span>Checked 16 Oct 2026</span><a href="https://www.gosugamers.net/lol/news/79314-all-teams-and-players-qualified-for-the-league-of-legends-world-championship-2026" target="_blank" rel="noopener noreferrer">Players ↗</a><a href="https://mid.gg/esports/worlds-2026" target="_blank" rel="noopener noreferrer">Staff ↗</a></div>
+        </section>`;
+    }
+
     function renderTeams(){
       const list=teams.filter(t => region==='ALL' || t.region===region);
       $('#teamGrid').innerHTML = list.map(t => `
-        <div class="team">
+        <div class="team" data-roster-team="${esc(t.short)}">
           <div class="team-top">
             <div class="team-main">
               <div class="team-code" style="color:${colors[t.region]}">${esc(t.logo || t.short)}</div>
@@ -1259,10 +1561,38 @@
               : `<span class="seed-text">Seed #${t.seed}</span>`
             }
           </div>
+          ${rosterPanel(t)}
         </div>
       `).join('');
 
       $('#teamGrid').querySelectorAll('.team').forEach(el => {
+
+        const toggle=el.querySelector('.roster-toggle');
+        const panel=el.querySelector('.team-roster');
+        if(toggle && panel){
+          const show=open=>{
+            panel.hidden=!open;
+            toggle.setAttribute('aria-expanded',String(open));
+            toggle.lastElementChild.textContent=open?'−':'＋';
+          };
+          show(pinnedRoster===el.dataset.rosterTeam);
+          el.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse') show(true)});
+          el.addEventListener('pointerleave',e=>{
+            if(e.pointerType==='mouse' && pinnedRoster!==el.dataset.rosterTeam && !el.contains(document.activeElement)) show(false);
+          });
+          el.addEventListener('focusin',()=>show(true));
+          el.addEventListener('focusout',e=>{
+            if(!el.contains(e.relatedTarget) && pinnedRoster!==el.dataset.rosterTeam && !el.matches(':hover')) show(false);
+          });
+          toggle.addEventListener('click',()=>{
+            pinnedRoster=pinnedRoster===el.dataset.rosterTeam?null:el.dataset.rosterTeam;
+            show(pinnedRoster===el.dataset.rosterTeam);
+          });
+          el.addEventListener('keydown',e=>{
+            if(e.key==='Escape'){pinnedRoster=null;show(false);e.stopPropagation()}
+          });
+        }
+
         el.addEventListener('pointermove',e=>{
           const r=el.getBoundingClientRect();
           el.style.setProperty('--mx',(e.clientX-r.left)+'px');
