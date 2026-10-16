@@ -657,6 +657,24 @@
     .swiss-match>.match-schedule{grid-column:1 / -1;width:100%;padding:2px 0 5px}
     .match-live-badge{display:inline-flex;align-items:center;gap:4px;color:#75f5be;font-size:9px;font-weight:900;letter-spacing:.08em}
     .match.is-live,.swiss-match.is-live,.ko-col .ko-match.is-live{border-color:#53e5ab;background:#16362d;box-shadow:inset 0 0 0 1px rgba(83,229,171,.5),0 0 16px rgba(83,229,171,.13)}
+
+    .swiss-pools-section{margin:28px 0}
+    .swiss-pools-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .swiss-pool{border:1px solid rgba(255,255,255,.1);border-radius:16px;background:linear-gradient(155deg,#151d29,#0c111a);overflow:hidden}
+    .swiss-pool-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,183,196,.04)}
+    .swiss-pool-header h3{margin:0;font-size:15px;color:#ffb7c4}
+    .swiss-pool-header span{font-size:10px;color:var(--muted)}
+    .swiss-pool-list{list-style:none;padding:4px 12px;margin:0}
+    .swiss-pool-team{display:flex;align-items:center;gap:8px;min-height:66px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .swiss-pool-team:last-child{border-bottom:0}
+    .swiss-pool-identity{flex:1;min-width:0}
+    .swiss-pool-name{font-size:12px;font-weight:800;line-height:1.4;overflow-wrap:anywhere}
+    .swiss-pool-region{font-size:10px;color:var(--muted);margin-top:3px}
+    .swiss-pool-record{flex-shrink:0;font-size:13px;font-weight:900;white-space:nowrap;padding:5px 7px;background:rgba(255,255,255,.04);border-radius:6px;font-variant-numeric:tabular-nums}
+    .pool-rules-link{font-size:11px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+    .pool-draw-note{font-size:11px;line-height:1.7;color:var(--muted);margin:12px 2px 0}
+    @media(max-width:1100px){.swiss-pools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:580px){.swiss-pools-grid{grid-template-columns:1fr}.swiss-pools-section .section-head{align-items:flex-start;gap:12px;flex-direction:column}}
   </style>
 </head>
 <body>
@@ -685,7 +703,11 @@
     <section id="swiss" class="wrap reveal">
       <div class="section-head"><div><h2>Swiss Stage</h2><p>In admin mode, wins, losses and qualification status are edited directly in the table.</p></div><button id="editBtn" class="btn admin-only hidden">Advanced JSON editor</button></div>
       <div class="card table-card"><table><thead><tr><th>Team</th><th>Region</th><th>Seed</th><th>Record</th><th>Current round</th><th>Status</th></tr></thead><tbody id="swissBody"></tbody></table></div>
-      <div style="height:20px"></div>
+      <section class="swiss-pools-section" aria-labelledby="swissPoolsTitle">
+        <div class="section-head"><div><h2 id="swissPoolsTitle" style="font-size:20px">Swiss Draw Pools</h2><p>Initial draw tiers · Records show Swiss match wins and losses.</p></div><a class="pool-rules-link" href="https://lolesports.com/en-GB/news/worlds-2026-primer" target="_blank" rel="noopener noreferrer">Official draw rules ↗</a></div>
+        <div id="swissPools" class="swiss-pools-grid"></div>
+        <p class="pool-draw-note">Round 1: Pool 1 vs Pool 4 · Pool 2 vs Pool 3. No same-region matchups. Later rounds pair teams with the same record, without repeat opponents.</p>
+      </section>
       <div class="card" style="padding:20px">
         <div class="section-head" style="margin-bottom:14px"><div><h2 style="font-size:20px">Swiss Journey</h2><p></p></div><div class="muted" style="font-size:12px"></div></div>
         <div><div id="swissTree" class="swiss-stage"></div></div>
@@ -1783,7 +1805,46 @@
       return fixtures.swissLineup.map(short=>short ? getTeam(short) : null);
     }
 
+
+    const swissDrawPools=[
+      {number:1,opponent:4,teams:['GEN','AL','TL','G2']},
+      {number:2,opponent:3,teams:['LØS','TSW','HLE','BLG']},
+      {number:3,opponent:2,teams:['LYON','MKOI','T1','TES']},
+      {number:4,opponent:1,teams:['CFO','IG','DK',null]}
+    ];
+
+    function confirmedPlayinWinner(){
+      const final=orderedPlayinMatches(classifyLiveStages().playin)[5];
+      const result=liveResult(final);
+      if(result?.finished) return result.winner;
+      // A published/admin Swiss lineup may already identify the qualifier.
+      const entrants=fixtures.swissLineup.filter(short=>getTeam(short)?.start==='Play-In');
+      return entrants.length===1 ? entrants[0] : null;
+    }
+
+    function renderSwissPools(){
+      const target=$('#swissPools');
+      if(!target) return;
+      const qualifier=confirmedPlayinWinner();
+      target.innerHTML=swissDrawPools.map(pool=>`
+        <article class="swiss-pool" aria-label="Pool ${pool.number}">
+          <div class="swiss-pool-header"><h3>Pool ${pool.number}</h3><span>Round 1 vs Pool ${pool.opponent}</span></div>
+          <ul class="swiss-pool-list">${pool.teams.map(short=>{
+            const resolved=short || qualifier;
+            const team=resolved ? getTeam(resolved) : null;
+            const wins=Number(team?.wins)||0,losses=Number(team?.losses)||0;
+            const label=team?.name || (short ? short : 'Play-In winner');
+            return `<li class="swiss-pool-team">
+              <span class="team-code" style="color:${team?colors[team.region]:'var(--muted)'}">${esc(team?.logo || team?.short || 'TBD')}</span>
+              <div class="swiss-pool-identity"><div class="swiss-pool-name">${esc(label)}</div><div class="swiss-pool-region">${team?esc(team.region)+(short?'':' · Play-In qualifier'):'Awaiting confirmation'}</div></div>
+              <span class="swiss-pool-record" aria-label="${team?wins+' Swiss wins, '+losses+' Swiss losses':'Team to be determined'}">${team?`<span class="win">${wins}</span><span class="muted">–</span><span class="loss">${losses}</span>`:'TBD'}</span>
+            </li>`;
+          }).join('')}</ul>
+        </article>`).join('');
+    }
+
     function renderSwissTable(){
+      renderSwissPools();
       const arr=swissStandingsEntries();
 
       $('#swissBody').innerHTML = arr.map((t,index) => {
