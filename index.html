@@ -675,6 +675,23 @@
     .pool-draw-note{font-size:11px;line-height:1.7;color:var(--muted);margin:12px 2px 0}
     @media(max-width:1100px){.swiss-pools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:580px){.swiss-pools-grid{grid-template-columns:1fr}.swiss-pools-section .section-head{align-items:flex-start;gap:12px;flex-direction:column}}
+
+    .swiss-rules{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:12px;margin:0 0 12px}
+    .swiss-rules>div{border:1px solid rgba(255,255,255,.09);border-radius:14px;background:#111923;padding:16px}
+    .swiss-rules strong{display:block;font-size:14px;margin-bottom:6px}
+    .swiss-rules span{display:block;font-size:12px;color:var(--muted);line-height:1.6}
+    .swiss-record-help{color:var(--muted);font-size:11px;line-height:1.6;margin:0 0 14px}
+    .swiss-progress{display:grid;gap:5px;margin-top:8px;min-width:106px}
+    .swiss-progress>div{display:flex;align-items:center;gap:4px}
+    .swiss-progress-label{font-size:9px;color:var(--muted);width:34px;text-align:left}
+    .swiss-progress-marker{width:13px;height:7px;border-radius:2px;background:#202938;border:1px solid #536074}
+    .swiss-progress-marker.filled.won{background:#55d6a4;border-color:#55d6a4}
+    .swiss-progress-marker.filled.lost{background:#ff777f;border-color:#ff777f}
+    .swiss-match-stakes{grid-column:1 / -1;padding:5px 6px;font-size:9px;line-height:1.5;text-align:center;font-weight:800;border-radius:4px;background:rgba(255,255,255,.04)}
+    .swiss-match-stakes.qualifier{color:#75e4b9}
+    .swiss-match-stakes.eliminator{color:#ff9ba2}
+    .swiss-match-stakes.decider{color:#ffd88d}
+    @media(max-width:780px){.swiss-rules{grid-template-columns:1fr}.swiss-rules>div{padding:12px}.swiss-rules strong{font-size:13px}}
   </style>
 </head>
 <body>
@@ -701,10 +718,16 @@
     </section>
 
     <section id="swiss" class="wrap reveal">
-      <div class="section-head"><div><h2>Swiss Stage</h2><p>In admin mode, wins, losses and qualification status are edited directly in the table.</p></div><button id="editBtn" class="btn admin-only hidden">Advanced JSON editor</button></div>
+      <div class="section-head"><div><h2>Swiss Stage</h2><p>Follow each team’s record on the road to Knockout.</p></div><button id="editBtn" class="btn admin-only hidden">Advanced JSON editor</button></div>
+      <div class="swiss-rules" aria-label="How the Swiss stage works">
+        <div><strong class="win">3 wins → Knockout</strong><span>Win three matches to qualify.</span></div>
+        <div><strong class="loss">3 losses → Eliminated</strong><span>Lose three matches and your run ends.</span></div>
+        <div><strong>Same record → Next opponent</strong><span>Each new round pairs teams on the same record. No repeat opponents.</span></div>
+      </div>
+      <p class="swiss-record-help">Records count match wins and losses, not individual games. Each filled marker below represents one match.</p>
       <div class="card table-card"><table><thead><tr><th>Team</th><th>Region</th><th>Seed</th><th>Record</th><th>Current round</th><th>Status</th></tr></thead><tbody id="swissBody"></tbody></table></div>
       <section class="swiss-pools-section" aria-labelledby="swissPoolsTitle">
-        <div class="section-head"><div><h2 id="swissPoolsTitle" style="font-size:20px">Swiss Draw Pools</h2><p>Initial draw tiers · Records show Swiss match wins and losses.</p></div><a class="pool-rules-link" href="https://lolesports.com/en-GB/news/worlds-2026-primer" target="_blank" rel="noopener noreferrer">Official draw rules ↗</a></div>
+        <div class="section-head"><div><h2 id="swissPoolsTitle" style="font-size:20px">Swiss Draw Pools</h2><p>Starting draw pools stay fixed as results change. Records show current Swiss match wins and losses.</p></div><a class="pool-rules-link" href="https://lolesports.com/en-GB/news/worlds-2026-primer" target="_blank" rel="noopener noreferrer">Official draw rules ↗</a></div>
         <div id="swissPools" class="swiss-pools-grid"></div>
         <p class="pool-draw-note">Round 1: Pool 1 vs Pool 4 · Pool 2 vs Pool 3. No same-region matchups. Later rounds pair teams with the same record, without repeat opponents.</p>
       </section>
@@ -1843,6 +1866,20 @@
         </article>`).join('');
     }
 
+
+    function swissProgress(wins,losses){
+      const markers=(count,kind)=>Array.from({length:3},(_,i)=>`<span class="swiss-progress-marker ${i<count?'filled '+kind:''}"></span>`).join('');
+      return `<div class="swiss-progress" role="img" aria-label="${wins} of 3 wins toward Knockout; ${losses} of 3 losses toward elimination"><div aria-hidden="true"><span class="swiss-progress-label">Wins</span>${markers(wins,'won')}</div><div aria-hidden="true"><span class="swiss-progress-label">Losses</span>${markers(losses,'lost')}</div></div>`;
+    }
+
+    function swissMatchStakes(key){
+      const [wins,losses]=key.split('-').map(Number);
+      const both=wins===2 && losses===2;
+      if(wins!==2 && losses!==2) return '';
+      const label=both?'Win → Knockout · Loss → Eliminated':wins===2?'Qualification match · Win → Knockout':'Elimination match · Loss → Eliminated';
+      return `<div class="swiss-match-stakes ${both?'decider':wins===2?'qualifier':'eliminator'}">${label}</div>`;
+    }
+
     function renderSwissTable(){
       renderSwissPools();
       const arr=swissStandingsEntries();
@@ -1868,7 +1905,7 @@
                <select class="swiss-inline-select" data-swiss-losses="${esc(t.short)}">${[0,1,2,3].map(n=>`<option value="${n}" ${losses===n?'selected':''}>${n}</option>`).join('')}</select>`
             : `<span class="win">${wins}</span><span class="muted">–</span><span class="loss">${losses}</span>`);
 
-        const currentState = !t ? '' : (fixtures.swissStatus[t.short] || '');
+        const currentState = !t ? '' : (wins>=3?'Qualified':losses>=3?'Eliminated':(fixtures.swissStatus[t.short] || 'Swiss'));
         const statusCell = !t
           ? `<span class="muted">TBD</span>`
           : (isAdmin
@@ -1884,7 +1921,7 @@
           <td>${isAdmin ? '<span class="swiss-drag-handle" title="Drag to reorder">⋮⋮</span>' : ''}${teamCell}</td>
           <td>${t ? `<span class="status"><i class="region-dot" style="color:${colors[t.region]}"></i>${esc(t.region)}</span>` : '<span class="muted">—</span>'}</td>
           <td>${t ? `#${t.seed}` : '—'}</td>
-          <td class="record">${recordCell}</td>
+          <td class="record"><div>${recordCell}</div>${t?swissProgress(wins,losses):''}</td>
           <td>${round}</td>
           <td>${statusCell}</td>
         </tr>`;
@@ -2005,6 +2042,7 @@
                </div>`;
 
           html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
+            ${swissMatchStakes(key)}
             ${matchSchedule(match)}
             <div class="slot-team">${teamControl(a,i)}</div>
             ${middle}
@@ -2012,6 +2050,7 @@
           </div>`;
         }else{
           html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
+            ${swissMatchStakes(key)}
             ${matchSchedule(match)}
             <div class="slot-team">${teamControl(a,i)}</div>
             <div class="vs">VS</div>
