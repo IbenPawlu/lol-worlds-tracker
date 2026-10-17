@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T20:05:23.744462Z",
+  "updated_at": "2026-10-17T21:05:24.813179Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -214,7 +214,7 @@
           "name": "FURIA Esports",
           "acronym": "FUR",
           "slug": "furia-uppercut",
-          "score": 0
+          "score": 1
         }
       ]
     },
