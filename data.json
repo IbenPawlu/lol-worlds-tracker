@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T19:05:22.044104Z",
+  "updated_at": "2026-10-17T20:05:23.744462Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -207,7 +207,7 @@
           "name": "MVK Esports",
           "acronym": "MVK",
           "slug": "mvk-esports",
-          "score": 1
+          "score": 2
         },
         {
           "id": 126688,
