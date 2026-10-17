@@ -692,6 +692,21 @@
     .swiss-match-stakes.eliminator{color:#ff9ba2}
     .swiss-match-stakes.decider{color:#ffd88d}
     @media(max-width:780px){.swiss-rules{grid-template-columns:1fr}.swiss-rules>div{padding:12px}.swiss-rules strong{font-size:13px}}
+
+    /* Keep Swiss BO3 scores inside the centered grid track. */
+    .swiss-match{grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr)}
+    .swiss-center-score{
+      grid-template-columns:18px 20px 18px !important;
+      column-gap:0 !important;
+      width:56px !important;min-width:0 !important;max-width:56px !important;
+      transform:none !important;
+    }
+    .swiss-center-score>span,.swiss-center-score>.swiss-score-select{
+      width:18px !important;min-width:0 !important;max-width:18px !important;
+      padding:0 !important;
+    }
+    .swiss-center-score>.vs-word{width:20px !important;min-width:0 !important;max-width:20px !important}
+    .swiss-center-score>.swiss-score-select{appearance:none;-webkit-appearance:none;cursor:pointer}
   </style>
 </head>
 <body>
