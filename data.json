@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T18:05:23.084159Z",
+  "updated_at": "2026-10-17T18:29:15.076941Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -180,8 +180,8 @@
       "id": 1710929,
       "slug": "mvk-esports-2026-10-17",
       "name": "Lower Bracket Final: MVK vs FUR",
-      "status": "not_started",
-      "begin_at": "2026-10-17T18:00:00Z",
+      "status": "running",
+      "begin_at": "2026-10-17T18:06:59Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
