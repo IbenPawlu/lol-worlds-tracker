@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-18T18:05:22.018832Z",
+  "updated_at": "2026-10-18T19:05:25.862755Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -222,8 +222,8 @@
       "id": 1710931,
       "slug": "karmine-corp-2026-10-18",
       "name": "Grand Final: KC vs MVK",
-      "status": "not_started",
-      "begin_at": "2026-10-18T18:00:00Z",
+      "status": "running",
+      "begin_at": "2026-10-18T18:07:30Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -249,7 +249,7 @@
           "name": "Karmine Corp",
           "acronym": "KC",
           "slug": "karmine-corp-academy",
-          "score": 0
+          "score": 1
         },
         {
           "id": 137803,
