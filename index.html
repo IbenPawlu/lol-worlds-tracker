@@ -707,6 +707,14 @@
     }
     .swiss-center-score>.vs-word{width:20px !important;min-width:0 !important;max-width:20px !important}
     .swiss-center-score>.swiss-score-select{appearance:none;-webkit-appearance:none;cursor:pointer}
+
+    .team.is-eliminated{
+      border-color:#e55364;background:#36161d;
+      box-shadow:inset 0 0 0 1px rgba(229,83,100,.5),0 0 16px rgba(229,83,100,.13);
+    }
+    .team.is-eliminated:hover{border-color:#e55364}
+    .team.is-eliminated:before{background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(229,83,100,.12),transparent 36%)}
+    .team.is-eliminated .team-roster{background:#271118;border-color:rgba(229,83,100,.5)}
   </style>
 </head>
 <body>
@@ -1645,11 +1653,29 @@
         </section>`;
     }
 
+
+    function eliminatedTournamentTeams(){
+      const eliminated=new Set(teams.filter(t=>
+        Number(t.losses)>=3 ||
+        String(t.status || '').toLowerCase()==='eliminated' ||
+        String(fixtures.swissStatus?.[t.short] || '').toLowerCase()==='eliminated'
+      ).map(t=>t.short));
+      const stages=classifyLiveStages();
+      const playin=orderedPlayinMatches(stages.playin);
+      // Upper-bracket losses are not eliminations in the double-elimination Play-In.
+      for(const match of [playin[2],playin[4],playin[5],...stages.knockout]){
+        const result=liveResult(match);
+        if(result?.finished) eliminated.add(result.loser);
+      }
+      return eliminated;
+    }
+
     function renderTeams(){
+      const eliminated=eliminatedTournamentTeams();
       const hoveredRoster=$('#teamGrid').querySelector('.team:hover')?.dataset.rosterTeam;
       const list=teams.filter(t => region==='ALL' || t.region===region);
       $('#teamGrid').innerHTML = list.map(t => `
-        <div class="team" data-roster-team="${esc(t.short)}">
+        <div class="team${eliminated.has(t.short)?' is-eliminated':''}" data-roster-team="${esc(t.short)}" ${eliminated.has(t.short)?'aria-label="'+esc(t.name)+' — Eliminated"':''}>
           <div class="team-top">
             <div class="team-main">
               <div class="team-code" style="color:${colors[t.region]}">${esc(t.logo || t.short)}</div>
