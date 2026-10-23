@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-23T18:19:15.713387Z",
+  "updated_at": "2026-10-23T19:05:24.002820Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -306,10 +306,10 @@
       "id": 1710936,
       "slug": "2026-10-23-10eb067f-fc72-4737-bcdb-616d477789da",
       "name": "Round 1: HLE vs TES",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-23T18:17:22Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-23T18:48:35Z",
+      "winner_id": 2883,
       "number_of_games": 1,
       "league": {
         "id": 297,
@@ -333,7 +333,7 @@
           "name": "Hanwha Life Esports",
           "acronym": "HLE",
           "slug": "hanwha-life-esports",
-          "score": 0
+          "score": 1
         },
         {
           "id": 126059,
@@ -349,7 +349,7 @@
       "slug": "2026-10-24-e5b9b4d5-7597-4fd2-b80c-711e8ccc4fd2",
       "name": "Round 1: BLG vs MKOI",
       "status": "not_started",
-      "begin_at": "2026-10-23T19:00:00Z",
+      "begin_at": "2026-10-23T19:10:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
