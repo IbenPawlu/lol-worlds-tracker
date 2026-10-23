@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-23T18:08:11.281938Z",
+  "updated_at": "2026-10-23T18:19:15.713387Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -306,8 +306,8 @@
       "id": 1710936,
       "slug": "2026-10-23-10eb067f-fc72-4737-bcdb-616d477789da",
       "name": "Round 1: HLE vs TES",
-      "status": "not_started",
-      "begin_at": "2026-10-23T18:10:00Z",
+      "status": "running",
+      "begin_at": "2026-10-23T18:17:22Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
