@@ -795,6 +795,15 @@
     @media(prefers-reduced-motion:reduce){
       .match.is-live,#swissTree .swiss-match.is-live,#knockoutBracket .ko-match.is-live,.swiss-fixture-card.is-live{animation:none}
     }
+
+    .swiss-fixture-card{flex-basis:278px}
+    .fixture-format{display:inline-block;padding:2px 5px;margin-left:5px;border:1px solid #526176;border-radius:4px;color:#ffb7c4;font-size:9px}
+    .swiss-fixture-team{display:grid;grid-template-columns:28px minmax(0,1fr) 50px 32px;gap:8px}
+    .swiss-fixture-team>.fixture-team-name{overflow-wrap:anywhere}
+    .fixture-swiss-record{font-size:11px;font-weight:700;color:#d2dce9;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .swiss-fixture-team>strong{text-align:center}
+    .fixture-score-head{display:grid;grid-template-columns:minmax(0,1fr) 50px 32px;gap:8px;padding:0 7px;margin-bottom:5px;font-size:8px;font-weight:700;color:var(--muted)}
+    .fixture-score-head>span:not(:first-child){text-align:center}
   </style>
 </head>
 <body>
@@ -2111,6 +2120,11 @@
 
 
     let swissStripInitialized=false;
+    function swissFixtureFormat(match){
+      const games=Number(match.number_of_games);
+      return [1,3,5].includes(games)?'BO'+games:'Format TBD';
+    }
+
     function renderSwissFixtureStrip(){
       const strip=$('#swissFixtureStrip');
       if(!strip) return;
@@ -2134,11 +2148,12 @@
           const outcome=result?.finished && team ? (result.winner===team.short?'fixture-winner':'fixture-loser'):'';
           const score=opponent?.score;
           const shown=(status==='running'||status==='finished') && score!=null && Number.isFinite(Number(score))?Number(score):'–';
-          return `<div class="swiss-fixture-team ${outcome}"><span class="slot-logo">${team?teamLogo(team):'?'}</span><span class="fixture-team-name">${esc(team?.short || opponent?.acronym || opponent?.name || 'Awaiting draw')}</span><strong>${shown}</strong></div>`;
+          return `<div class="swiss-fixture-team ${outcome}"><span class="slot-logo">${team?teamLogo(team):'?'}</span><span class="fixture-team-name">${esc(team?.short || opponent?.acronym || opponent?.name || 'Awaiting draw')}</span><span class="fixture-swiss-record" title="Current overall Swiss match wins and losses" aria-label="${team?esc(team.name)+': '+(Number(team.wins)||0)+' Swiss wins, '+(Number(team.losses)||0)+' Swiss losses':'Swiss record unavailable'}">${team?`${Number(team.wins)||0}–${Number(team.losses)||0}`:'–'}</span><strong aria-label="Match score ${shown}">${shown}</strong></div>`;
         };
         return `<article class="swiss-fixture-card${matchLiveClass(match)}" data-fixture-id="${esc(match.id)}" aria-label="${esc(match.name || round)}">
-          <div class="swiss-fixture-top"><span>${esc(round)}</span><span class="${status==='running'?'match-live-badge':''}">${label}</span></div>
+          <div class="swiss-fixture-top"><span>${esc(round)} <span class="fixture-format">${swissFixtureFormat(match)}</span></span><span class="${status==='running'?'match-live-badge':''}">${label}</span></div>
           ${valid?`<time class="swiss-fixture-time" datetime="${esc(date.toISOString())}">${esc(new Intl.DateTimeFormat(undefined,{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(date))}</time>`:'<div class="swiss-fixture-time">Time TBD</div>'}
+          <div class="fixture-score-head" aria-hidden="true"><span>Team</span><span title="Current overall Swiss record">Swiss W–L</span><span>Match</span></div>
           ${side(0)}${side(1)}
         </article>`;
       }).join('');
