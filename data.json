@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T00:40:13.102587Z",
+  "updated_at": "2026-10-24T01:05:24.299264Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -558,10 +558,10 @@
       "id": 1710938,
       "slug": "2026-10-24-b5b7affe-7c98-4811-9def-c182def75bb1",
       "name": "Round 1: TSW vs LY",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-24T00:07:24Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-24T00:41:30Z",
+      "winner_id": 136066,
       "number_of_games": 1,
       "league": {
         "id": 297,
@@ -592,14 +592,14 @@
           "name": "LYON",
           "acronym": "LY",
           "slug": "lyon",
-          "score": 0
+          "score": 1
         }
       ]
     },
     {
       "id": 1710940,
       "slug": "2026-10-24-b4e03db8-7566-491b-ad2f-a27e6b8d0397",
-      "name": "Round 2: TBD vs TBD",
+      "name": "Round 2: DK vs T1",
       "status": "not_started",
       "begin_at": "2026-10-24T17:00:00Z",
       "end_at": null,
@@ -621,12 +621,27 @@
         "name": "Group Stage",
         "slug": "league-of-legends-world-championship-2026-group-stage"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 132531,
+          "name": "Dplus KIA",
+          "acronym": "DK",
+          "slug": "dplus-kia",
+          "score": 0
+        },
+        {
+          "id": 126061,
+          "name": "T1",
+          "acronym": "T1",
+          "slug": "t1",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710941,
       "slug": "2026-10-24-ce3dadeb-73fc-4fb8-933e-62107026e473",
-      "name": "Round 2: TBD vs TBD",
+      "name": "Round 2: CFO vs MKOI",
       "status": "not_started",
       "begin_at": "2026-10-24T18:00:00Z",
       "end_at": null,
@@ -648,12 +663,27 @@
         "name": "Group Stage",
         "slug": "league-of-legends-world-championship-2026-group-stage"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 130355,
+          "name": "CTBC Flying Oyster",
+          "acronym": "CFO",
+          "slug": "ctbc-flying-oyster",
+          "score": 0
+        },
+        {
+          "id": 126536,
+          "name": "Movistar KOI",
+          "acronym": "MKOI",
+          "slug": "mad-lions-league-of-legends",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710942,
       "slug": "2026-10-24-c581a56c-91c6-4af8-b67f-a7b11726a042",
-      "name": "Round 2: TBD vs TBD",
+      "name": "Round 2: HLE vs GEN",
       "status": "not_started",
       "begin_at": "2026-10-24T19:00:00Z",
       "end_at": null,
@@ -675,12 +705,27 @@
         "name": "Group Stage",
         "slug": "league-of-legends-world-championship-2026-group-stage"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 2883,
+          "name": "Hanwha Life Esports",
+          "acronym": "HLE",
+          "slug": "hanwha-life-esports",
+          "score": 0
+        },
+        {
+          "id": 2882,
+          "name": "Gen.G",
+          "acronym": "GEN",
+          "slug": "geng",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710943,
       "slug": "2026-10-24-8b523b08-d732-4818-bf73-3efd0f963558",
-      "name": "Round 2: TBD vs TBD",
+      "name": "Round 2: LY vs KC",
       "status": "not_started",
       "begin_at": "2026-10-24T20:00:00Z",
       "end_at": null,
@@ -702,12 +747,27 @@
         "name": "Group Stage",
         "slug": "league-of-legends-world-championship-2026-group-stage"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 136066,
+          "name": "LYON",
+          "acronym": "LY",
+          "slug": "lyon",
+          "score": 0
+        },
+        {
+          "id": 134078,
+          "name": "Karmine Corp",
+          "acronym": "KC",
+          "slug": "karmine-corp-academy",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710944,
       "slug": "2026-10-24-ebcc5f72-f227-43e9-ac83-de797fe4592c",
-      "name": "Round 2: TBD vs TBD",
+      "name": "Round 2: G2 vs LOS",
       "status": "not_started",
       "begin_at": "2026-10-24T21:00:00Z",
       "end_at": null,
@@ -729,12 +789,27 @@
         "name": "Group Stage",
         "slug": "league-of-legends-world-championship-2026-group-stage"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 88,
+          "name": "G2 Esports",
+          "acronym": "G2",
+          "slug": "g2-esports",
+          "score": 0
+        },
+        {
+          "id": 133796,
+          "name": "LOS",
+          "acronym": "LOS",
+          "slug": "los",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710945,
       "slug": "2026-10-25",
-      "name": "Round 2: TBD vs TBD",
+      "name": "Round 2: IG vs TSW",
       "status": "not_started",
       "begin_at": "2026-10-24T22:00:00Z",
       "end_at": null,
@@ -756,12 +831,27 @@
         "name": "Group Stage",
         "slug": "league-of-legends-world-championship-2026-group-stage"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 411,
+          "name": "Invictus Gaming",
+          "acronym": "IG",
+          "slug": "invictus-gaming",
+          "score": 0
+        },
+        {
+          "id": 136073,
+          "name": "Team Secret Whales",
+          "acronym": "TSW",
+          "slug": "team-secret-whales",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710946,
       "slug": "2026-10-25-5597a3ca-e083-4fe3-b6ef-201da3e3dd4f",
-      "name": "Round 2: TBD vs TBD",
+      "name": "Round 2: TES vs AL",
       "status": "not_started",
       "begin_at": "2026-10-24T23:00:00Z",
       "end_at": null,
@@ -783,12 +873,27 @@
         "name": "Group Stage",
         "slug": "league-of-legends-world-championship-2026-group-stage"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 126059,
+          "name": "Top Esports",
+          "acronym": "TES",
+          "slug": "top-esports",
+          "score": 0
+        },
+        {
+          "id": 129971,
+          "name": "Anyone's Legend",
+          "acronym": "AL",
+          "slug": "anyone-s-legend",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710947,
       "slug": "2026-10-25-06474646-4e3a-4be8-ba0a-e151b37f8de5",
-      "name": "Round 2: TBD vs TBD",
+      "name": "Round 2: TL vs BLG",
       "status": "not_started",
       "begin_at": "2026-10-25T00:00:00Z",
       "end_at": null,
@@ -810,7 +915,22 @@
         "name": "Group Stage",
         "slug": "league-of-legends-world-championship-2026-group-stage"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 390,
+          "name": "Team Liquid",
+          "acronym": "TL",
+          "slug": "liquid",
+          "score": 0
+        },
+        {
+          "id": 1566,
+          "name": "Bilibili Gaming",
+          "acronym": "BLG",
+          "slug": "bilibili-gaming",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1710953,
