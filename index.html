@@ -726,6 +726,12 @@
     .swiss-waiting{padding:10px 3px;font-size:9px;color:var(--muted);line-height:1.6}
     .swiss-waiting>div{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:5px}
     .swiss-waiting-team{padding:2px 5px;border:1px solid #445267;border-radius:4px;color:#e1e7ef;background:#1b2431}
+
+    .playin-team-side.match-side-winner{background:rgba(83,229,171,.14);box-shadow:inset 0 0 0 1px rgba(83,229,171,.38);border-radius:5px}
+    .playin-team-side.match-side-loser{background:rgba(229,83,100,.15);box-shadow:inset 0 0 0 1px rgba(229,83,100,.25);border-radius:5px}
+    .playin-team-side.match-side-loser .slot-logo{filter:grayscale(1);opacity:.55}
+    .playin-team-side.match-side-loser .slot-name{color:#b6a0a6}
+    .swiss-awaiting-draw{font-size:9px;white-space:normal;line-height:1.4}
   </style>
 </head>
 <body>
@@ -1787,21 +1793,22 @@
 
     function renderDetail(){}
 
-    function playinTeam(value,path,side){
+    function playinTeam(value,path,side,result=null){
+      const outcome=result?.finished && value ? (result.winner===value?' match-side-winner':result.loser===value?' match-side-loser':'') : '';
       if(isAdmin){
-        return `<div class="playin-team-side ${side}">
+        return `<div class="playin-team-side ${side}${outcome}">
           <select class="bracket-select" data-playin-tree="${path}">${teamOptions(value)}</select>
         </div>`;
       }
       const t=value?getTeam(value):null;
       if(!t){
-        return `<div class="playin-team-side ${side}">
+        return `<div class="playin-team-side ${side}${outcome}">
           ${side==='left'
             ? `<span class="slot-logo"></span><span class="slot-name muted">TBD</span>`
             : `<span class="slot-name muted">TBD</span><span class="slot-logo"></span>`}
         </div>`;
       }
-      return `<div class="playin-team-side ${side}">
+      return `<div class="playin-team-side ${side}${outcome}">
         ${side==='left'
           ? `<span class="slot-logo" style="color:${colors[t.region]}">${esc(t.logo||t.short)}</span><span class="slot-name">${esc(t.short)}</span>`
           : `<span class="slot-name">${esc(t.short)}</span><span class="slot-logo" style="color:${colors[t.region]}">${esc(t.logo||t.short)}</span>`}
@@ -1832,15 +1839,16 @@
     function matchBox(a,b,pathA,pathB,scoreA,scoreB,scorePathA,scorePathB){
       const dot=pathA.lastIndexOf('.');
       const match=fixtureMatch('playin',pathA.slice(0,dot),Math.floor(Number(pathA.slice(dot+1))/2),a,b);
+      const result=liveResult(match);
       const live=liveScoresForTeams(a,b,match?.id);
       const shownA=live?.a ?? scoreA;
       const shownB=live?.b ?? scoreB;
       return `<div class="match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
         ${matchSchedule(match)}
         <div class="slot">
-          ${playinTeam(a,pathA,'left')}
+          ${playinTeam(a,pathA,'left',result)}
           ${playinScoreMid(shownA,shownB,scorePathA,scorePathB)}
-          ${playinTeam(b,pathB,'right')}
+          ${playinTeam(b,pathB,'right',result)}
         </div>
       </div>`;
     }
@@ -2087,10 +2095,10 @@
             ? `<select class="swiss-tree-select" data-swiss-tree-slot="${key}.${index}">${teamOptions(vals[index])}</select>`
             : (team
               ? `<span style="display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;width:100%"><span class="slot-logo" style="color:${colors[team.region]}">${esc(team.logo||team.short)}</span><span class="slot-name">${esc(team.short)}</span></span>`
-              : `<span class="slot-name muted">TBD</span>`);
+              : `<span class="slot-name muted swiss-awaiting-draw" title="Opponent will populate after the official draw">Awaiting draw</span>`);
         };
 
-        const side=(team,index)=>`<div class="slot-team ${outcome(team)}">${teamControl(team,index)}${outcome(team)==='swiss-side-winner'?'<span class="swiss-outcome" aria-label="Winner">✓</span>':outcome(team)==='swiss-side-loser'?'<span class="swiss-outcome" aria-label="Lost">×</span>':''}</div>`;
+        const side=(team,index)=>`<div class="slot-team ${outcome(team)}" ${outcome(team)?`aria-label="${esc(team.short)} — ${outcome(team)==='swiss-side-winner'?'Winner':'Lost'}"`:''}>${teamControl(team,index)}${outcome(team)==='swiss-side-loser'?'<span class="swiss-outcome" aria-label="Lost">×</span>':''}</div>`;
         if(scored){
           const live=liveScoresForTeams(vals[i],vals[i+1],match?.id);
           const scoreA=live?.a ?? scores[i];
@@ -2174,7 +2182,7 @@
       $('#swissTree').innerHTML = `
         <div class="swiss-titleline">
           <div>
-            <div style="font-size:20px;font-weight:1000;letter-spacing:-.03em">Swiss Journey</div><p class="muted" style="font-size:11px;margin:8px 0 0">✓ Winner · × Lost · Green and red sides mark completed results. Teams awaiting the next draw are listed without assumed pairings.</p>
+            <div style="font-size:20px;font-weight:1000;letter-spacing:-.03em">Swiss Journey</div><p class="muted" style="font-size:11px;margin:8px 0 0">Green = winner · Red = loser · Greyed logos mark defeated teams. Teams awaiting the next draw are listed without assumed pairings.</p>
             
           </div>
           
