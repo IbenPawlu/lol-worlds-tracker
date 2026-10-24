@@ -761,6 +761,21 @@
       background:#16362d;
       box-shadow:inset 0 0 0 1px rgba(83,229,171,.25),0 0 16px rgba(83,229,171,.18);
     }
+
+    .swiss-fixtures-section{margin:28px 0}
+    .swiss-fixtures-controls{display:flex;gap:8px}
+    .swiss-fixture-strip{position:relative;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 2px 14px;scrollbar-color:#536276 #101720;overscroll-behavior-x:contain}
+    .swiss-fixture-strip:focus-visible{outline:2px solid #53e5ab;outline-offset:4px;border-radius:6px}
+    .swiss-fixture-card{flex:0 0 238px;scroll-snap-align:start;padding:14px;box-sizing:border-box;background:#111923;border:1px solid #3b4656;border-radius:12px}
+    .swiss-fixture-card.is-live{border:2px solid #53e5ab;background:#16362d;box-shadow:0 0 12px rgba(83,229,171,.16)}
+    .swiss-fixture-top{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-weight:800}
+    .swiss-fixture-time{display:block;margin:10px 0 12px;font-size:11px;color:#edf1f7;line-height:1.6}
+    .swiss-fixture-team{display:flex;align-items:center;gap:9px;border-radius:5px;padding:7px;margin-top:5px;min-height:40px;box-sizing:border-box}
+    .fixture-team-name{font-size:12px;font-weight:800;flex:1;min-width:0}
+    .swiss-fixture-team>strong{font-size:15px;font-variant-numeric:tabular-nums}
+    .swiss-fixture-team.fixture-winner{background:rgba(83,229,171,.14)}
+    .swiss-fixture-team.fixture-loser{background:rgba(229,83,100,.15)}
+    .swiss-fixture-team.fixture-loser .slot-logo{filter:grayscale(1);opacity:.55}
   </style>
 </head>
 <body>
@@ -797,6 +812,10 @@
         <div class="section-head" style="justify-content:flex-end"><a class="pool-rules-link" href="https://lolesports.com/en-GB/news/worlds-2026-primer" target="_blank" rel="noopener noreferrer">Official draw rules ↗</a></div>
         <div id="swissPools" class="swiss-pools-grid"></div>
         <p class="pool-draw-note">Round 1: Pool 1 vs Pool 4 · Pool 2 vs Pool 3. No same-region matchups. Later rounds pair teams with the same record, without repeat opponents.</p>
+      </section>
+      <section class="swiss-fixtures-section" aria-labelledby="swissFixturesTitle">
+        <div class="section-head"><div><h2 id="swissFixturesTitle" style="font-size:20px">Swiss Fixtures</h2></div><div class="swiss-fixtures-controls"><button class="btn" id="swissFixturesPrev" type="button" aria-label="Previous Swiss fixtures">←</button><button class="btn" id="swissFixturesNext" type="button" aria-label="Next Swiss fixtures">→</button></div></div>
+        <div id="swissFixtureStrip" class="swiss-fixture-strip" tabindex="0" aria-label="Swiss matches in chronological order"></div>
       </section>
       <div class="card" style="padding:20px">
         <div class="section-head" style="margin-bottom:14px"><div><h2 style="font-size:20px">Swiss Journey</h2><p></p></div><div class="muted" style="font-size:12px"></div></div>
@@ -1451,7 +1470,7 @@
     "tone": "light"
   },
   "G2": {
-    "src": "assets/team-logos/g2.png",
+    "src": "assets/team-logos/g2.png?v=2",
     "tone": "dark"
   },
   "KC": {
@@ -2071,9 +2090,55 @@
       return `<div class="swiss-match-stakes ${both?'decider':wins===2?'qualifier':'eliminator'}">${label}</div>`;
     }
 
+
+    let swissStripInitialized=false;
+    function renderSwissFixtureStrip(){
+      const strip=$('#swissFixtureStrip');
+      if(!strip) return;
+      const position=strip.scrollLeft;
+      const matches=[...classifyLiveStages().swiss].sort((a,b)=>matchTime(a)-matchTime(b)||Number(a.id)-Number(b.id));
+      if(!matches.length){
+        strip.innerHTML='<p class="muted">Fixtures will appear when the schedule is available.</p>';
+        return;
+      }
+      strip.innerHTML=matches.map(match=>{
+        const pair=liveMatchTeams(match);
+        const result=liveResult(match);
+        const status=String(match.status || '').toLowerCase();
+        const label=status==='running'?'LIVE':status==='finished'?'Final':status==='canceled'||status==='cancelled'?'Cancelled':status==='postponed'?'Postponed':'Upcoming';
+        const date=new Date(match.begin_at || '');
+        const valid=!Number.isNaN(date.getTime());
+        const round=String(match.name || '').match(/Round\s*\d+/i)?.[0] || 'Swiss';
+        const side=index=>{
+          const opponent=match.opponents?.[index];
+          const team=getTeam(pair?.[index] || trackerShortForOpponent(opponent));
+          const outcome=result?.finished && team ? (result.winner===team.short?'fixture-winner':'fixture-loser'):'';
+          const score=opponent?.score;
+          const shown=(status==='running'||status==='finished') && score!=null && Number.isFinite(Number(score))?Number(score):'–';
+          return `<div class="swiss-fixture-team ${outcome}"><span class="slot-logo">${team?teamLogo(team):'?'}</span><span class="fixture-team-name">${esc(team?.short || opponent?.acronym || opponent?.name || 'Awaiting draw')}</span><strong>${shown}</strong></div>`;
+        };
+        return `<article class="swiss-fixture-card${matchLiveClass(match)}" data-fixture-id="${esc(match.id)}" aria-label="${esc(match.name || round)}">
+          <div class="swiss-fixture-top"><span>${esc(round)}</span><span class="${status==='running'?'match-live-badge':''}">${label}</span></div>
+          ${valid?`<time class="swiss-fixture-time" datetime="${esc(date.toISOString())}">${esc(new Intl.DateTimeFormat(undefined,{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(date))}</time>`:'<div class="swiss-fixture-time">Time TBD</div>'}
+          ${side(0)}${side(1)}
+        </article>`;
+      }).join('');
+      strip.scrollLeft=position;
+      if(!swissStripInitialized){
+        const current=matches.find(m=>m.status==='running') || matches.find(m=>!['finished','canceled','cancelled'].includes(m.status));
+        const card=current ? [...strip.children].find(el=>el.dataset.fixtureId===String(current.id)) : null;
+        if(card) strip.scrollLeft=card.offsetLeft-strip.offsetLeft;
+        swissStripInitialized=true;
+      }
+      $('#swissFixturesPrev').onclick=()=>strip.scrollBy({left:-Math.max(240,strip.clientWidth*.8),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+      $('#swissFixturesNext').onclick=()=>strip.scrollBy({left:Math.max(240,strip.clientWidth*.8),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    }
+
+
     // Existing refresh/admin hooks now update the consolidated pool cards.
     function renderSwissTable(){
       renderSwissPools();
+      renderSwissFixtureStrip();
     }
 
     function swissFixtureRows(key){
