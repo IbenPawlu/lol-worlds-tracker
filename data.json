@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T05:05:23.982947Z",
+  "updated_at": "2026-10-24T05:50:41.280214Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -597,48 +597,6 @@
       ]
     },
     {
-      "id": 1710940,
-      "slug": "2026-10-24-b4e03db8-7566-491b-ad2f-a27e6b8d0397",
-      "name": "Round 2: DK vs T1",
-      "status": "not_started",
-      "begin_at": "2026-10-24T17:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 1,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22047,
-        "name": "Group Stage",
-        "slug": "league-of-legends-world-championship-2026-group-stage"
-      },
-      "opponents": [
-        {
-          "id": 132531,
-          "name": "Dplus KIA",
-          "acronym": "DK",
-          "slug": "dplus-kia",
-          "score": 0
-        },
-        {
-          "id": 126061,
-          "name": "T1",
-          "acronym": "T1",
-          "slug": "t1",
-          "score": 0
-        }
-      ]
-    },
-    {
       "id": 1710941,
       "slug": "2026-10-24-ce3dadeb-73fc-4fb8-933e-62107026e473",
       "name": "Round 2: CFO vs MKOI",
@@ -886,6 +844,48 @@
           "name": "Anyone's Legend",
           "acronym": "AL",
           "slug": "anyone-s-legend",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1710940,
+      "slug": "2026-10-24-b4e03db8-7566-491b-ad2f-a27e6b8d0397",
+      "name": "Round 2: DK vs T1",
+      "status": "not_started",
+      "begin_at": "2026-10-24T23:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 1,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22047,
+        "name": "Group Stage",
+        "slug": "league-of-legends-world-championship-2026-group-stage"
+      },
+      "opponents": [
+        {
+          "id": 132531,
+          "name": "Dplus KIA",
+          "acronym": "DK",
+          "slug": "dplus-kia",
+          "score": 0
+        },
+        {
+          "id": 126061,
+          "name": "T1",
+          "acronym": "T1",
+          "slug": "t1",
           "score": 0
         }
       ]
