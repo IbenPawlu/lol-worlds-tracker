@@ -715,6 +715,17 @@
     .team.is-eliminated:hover{border-color:#e55364}
     .team.is-eliminated:before{background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(229,83,100,.12),transparent 36%)}
     .team.is-eliminated .team-roster{background:#271118;border-color:rgba(229,83,100,.5)}
+
+    .swiss-match>.slot-team{position:relative;min-height:38px;border-radius:5px;padding:5px 3px;box-sizing:border-box}
+    .swiss-match>.swiss-side-winner{background:rgba(83,229,171,.14);box-shadow:inset 0 0 0 1px rgba(83,229,171,.38)}
+    .swiss-match>.swiss-side-loser{background:rgba(229,83,100,.15);box-shadow:inset 0 0 0 1px rgba(229,83,100,.25)}
+    .swiss-side-loser .slot-logo{filter:grayscale(1);opacity:.55}
+    .swiss-side-loser .slot-name{color:#b6a0a6}
+    .swiss-outcome{position:absolute;top:-6px;right:0;border-radius:50%;background:#173b30;color:#75f5be;width:14px;height:14px;display:grid;place-items:center;font-size:10px;font-weight:900}
+    .swiss-side-loser .swiss-outcome{background:#41212a;color:#ff9ba2}
+    .swiss-waiting{padding:10px 3px;font-size:9px;color:var(--muted);line-height:1.6}
+    .swiss-waiting>div{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:5px}
+    .swiss-waiting-team{padding:2px 5px;border:1px solid #445267;border-radius:4px;color:#e1e7ef;background:#1b2431}
   </style>
 </head>
 <body>
@@ -1015,23 +1026,19 @@
     function liveResult(match){
       const pair=liveMatchTeams(match);
       if(!pair) return null;
-
       const scores={};
       for(const opp of match.opponents || []){
         const short=trackerShortForOpponent(opp);
-        if(short) scores[short]=Number(opp.score);
+        if(short) scores[short]=opp.score==null?null:Number(opp.score);
       }
-
-      const a=scores[pair[0]], b=scores[pair[1]];
-      if(!Number.isFinite(a) || !Number.isFinite(b) || a===b) return null;
-
-      return {
-        teams:pair,
-        scores,
-        winner:a>b ? pair[0] : pair[1],
-        loser:a>b ? pair[1] : pair[0],
-        finished:String(match.status||'').toLowerCase()==='finished'
-      };
+      const finished=String(match.status || '').toLowerCase()==='finished';
+      const official=(match.opponents || []).find(opp=>match.winner_id!=null && String(opp.id)===String(match.winner_id));
+      const officialShort=official ? trackerShortForOpponent(official) : null;
+      const a=scores[pair[0]],b=scores[pair[1]];
+      const hasScore=Number.isFinite(a) && Number.isFinite(b) && a!==b;
+      const winner=finished && officialShort ? officialShort : hasScore ? (a>b?pair[0]:pair[1]) : null;
+      if(!winner) return null;
+      return {teams:pair,scores,winner,loser:pair.find(short=>short!==winner),finished};
     }
 
     function setSlotIfTBD(target,key,index,value){
@@ -1043,7 +1050,7 @@
       if(!short) return;
       if(w>=3) fixtures.swissStatus[short]='Qualified';
       else if(l>=3) fixtures.swissStatus[short]='Eliminated';
-      else if(!fixtures.swissStatus[short]) fixtures.swissStatus[short]='Swiss';
+      else fixtures.swissStatus[short]='Swiss';
 
       const t=getTeam(short);
       if(t){
@@ -1124,34 +1131,57 @@
       return Object.prototype.hasOwnProperty.call(fixtures.swiss,key) ? key : null;
     }
 
+    let swissWaitingByRecord={};
     function applySwissFixturesFromLive(matches){
-      const ordered=[...matches].sort((a,b)=>matchTime(a)-matchTime(b));
-      const firstRound=ordered.filter(m=>/\bround\s*1\b/i.test(m.name || ''));
-      fixtureMatchIds.swiss['0-0']=firstRound.slice(0,8).map(m=>m.id);
+      if(!matches.length) return;
+      const roundOf=match=>Number(String(match.name || '').match(/\bround\s*(\d+)\b/i)?.[1]) || 0;
+      const ordered=[...new Map(matches.map(m=>[String(m.id),m])).values()]
+        .sort((a,b)=>(roundOf(a)||99)-(roundOf(b)||99) || matchTime(a)-matchTime(b) || Number(a.id)-Number(b.id));
       const records={};
-      const bucketCounts={};
-      Object.keys(fixtures.swiss).forEach(k=>bucketCounts[k]=0);
-
-      ordered.forEach(match=>{
-        const pair=liveMatchTeams(match);
-        if(!pair) return;
-
-        pair.forEach(short=>{
-          if(!records[short]) records[short]={w:0,l:0};
-        });
-
-        const aRec=records[pair[0]];
-        const bRec=records[pair[1]];
-        let key=swissBucketForRecord(aRec.w,aRec.l);
-        if(!key) key=swissBucketForRecord(bRec.w,bRec.l);
-
-        if(key){
-          const roundOneIndex=key==='0-0'?firstRound.findIndex(m=>m.id===match.id):-1;
-          const pairIndex=roundOneIndex>=0?roundOneIndex:bucketCounts[key]++;
-          (fixtureMatchIds.swiss[key] ||= [])[pairIndex]=match.id;
-          fillPair(fixtures.swiss,key,pairIndex,pair);
-
-          if(key==='0-0'){
+      const counts={};
+      swissWaitingByRecord={};
+      // Rebuild API-owned positions on every poll. Draw corrections and changes
+      // to begin_at must not leave yesterday's teams attached to today's IDs.
+      Object.entries(fixtures.swiss).forEach(([key,slots])=>{
+        fixtures.swiss[key]=Array(slots.length).fill(null);
+        fixtureMatchIds.swiss[key]=[];
+        counts[key]=0;
+      });
+      Object.entries(fixtures.swissScores).forEach(([key,slots])=>{
+        fixtures.swissScores[key]=Array(slots.length).fill(null);
+      });
+      const rounds=[...new Set(ordered.map(roundOf))].sort((a,b)=>a-b);
+      for(const round of rounds){
+        const group=ordered.filter(m=>roundOf(m)===round);
+        const completed=[];
+        for(const match of group){
+          const pair=liveMatchTeams(match);
+          if(!pair){
+            // Round 1 has only one record bucket, so its dates can be shown
+            // before the initial draw has published any opponents.
+            if(round===1 && counts['0-0']<fixtures.swiss['0-0'].length/2){
+              fixtureMatchIds.swiss['0-0'][counts['0-0']++]=match.id;
+            }
+            continue;
+          }
+          pair.forEach(short=>{records[short] ||= {w:0,l:0}});
+          const a=records[pair[0]],b=records[pair[1]];
+          // Do not guess a later round's bucket when prior results are missing.
+          const valid=a.w===b.w && a.l===b.l && (!round || a.w+a.l===round-1);
+          const key=valid ? swissBucketForRecord(a.w,a.l) : null;
+          if(key && counts[key]<fixtures.swiss[key].length/2){
+            const index=counts[key]++,i=index*2;
+            fixtures.swiss[key][i]=pair[0];
+            fixtures.swiss[key][i+1]=pair[1];
+            fixtureMatchIds.swiss[key][index]=match.id;
+            if(fixtures.swissScores[key]){
+              for(let side=0;side<2;side++){
+                const value=match.opponents[side]?.score;
+                fixtures.swissScores[key][i+side]=value!=null && Number.isFinite(Number(value))?Number(value):null;
+              }
+            }
+          }
+          if(round===1){
             pair.forEach(short=>{
               if(!fixtures.swissLineup.includes(short)){
                 const empty=fixtures.swissLineup.findIndex(x=>!x);
@@ -1159,31 +1189,30 @@
               }
             });
           }
-
-          // Persist API score into the scored Swiss buckets.
-          if(fixtures.swissScores?.[key]){
-            const live=liveResult(match);
-            if(live){
-              const i=pairIndex*2;
-              if(i+1<fixtures.swissScores[key].length){
-                fixtures.swissScores[key][i]=live.scores[pair[0]];
-                fixtures.swissScores[key][i+1]=live.scores[pair[1]];
-              }
-            }
-          }
+          const result=liveResult(match);
+          if(result?.finished) completed.push(result);
         }
-
-        const result=liveResult(match);
-        if(result?.finished){
+        // All fixtures in a round use records from BEFORE that round.
+        for(const result of completed){
           records[result.winner].w++;
           records[result.loser].l++;
         }
-
-        pair.forEach(short=>{
-          const r=records[short];
-          ensureSwissStatusFromRecord(short,r.w,r.l);
-        });
-      });
+      }
+      for(const [short,r] of Object.entries(records)){
+        ensureSwissStatusFromRecord(short,r.w,r.l);
+        const key=swissBucketForRecord(r.w,r.l);
+        if(key && !fixtures.swiss[key].includes(short)){
+          (swissWaitingByRecord[key] ||= []).push(short);
+        }
+      }
+      // Explicit admin edits are kept separately from API-owned slots.
+      for(const [key,overrides] of Object.entries(fixtures.swissOverrides || {})){
+        if(!fixtures.swiss[key]) continue;
+        for(const [index,value] of Object.entries(overrides)){
+          const i=Number(index);
+          if(Number.isInteger(i) && i>=0 && i<fixtures.swiss[key].length) fixtures.swiss[key][i]=value;
+        }
+      }
     }
 
     function applyKnockoutFixturesFromLive(matches){
@@ -1340,7 +1369,7 @@
     });
 
     if(!fixtures.swissScores) fixtures.swissScores={};
-    const swissScoreShape={"2-0":4,"0-2":4,"2-1":6,"2-2":6};
+    const swissScoreShape={"0-0":16,"1-0":8,"0-1":8,"2-0":4,"1-1":8,"0-2":4,"2-1":6,"1-2":6,"2-2":6};
     Object.entries(swissScoreShape).forEach(([key,len])=>{
       if(!Array.isArray(fixtures.swissScores[key])) fixtures.swissScores[key]=Array(len).fill(null);
       if(fixtures.swissScores[key].length<len) fixtures.swissScores[key]=fixtures.swissScores[key].concat(Array(len-fixtures.swissScores[key].length).fill(null));
@@ -2042,7 +2071,7 @@
 
     function swissFixtureRows(key){
       const vals=fixtures.swiss[key] || [];
-      const scored = ['2-0','0-2','2-1','2-2'].includes(key);
+      const scored=true;
       const scores = scored ? (fixtures.swissScores[key] || []) : [];
       let html='';
 
@@ -2051,6 +2080,8 @@
         const b=vals[i+1] ? getTeam(vals[i+1]) : null;
         const match=fixtureMatch('swiss',key,i/2,vals[i],vals[i+1]);
 
+        const result=liveResult(match);
+        const outcome=team=>result?.finished && team ? (result.winner===team.short?'swiss-side-winner':result.loser===team.short?'swiss-side-loser':'') : '';
         const teamControl=(team,index)=>{
           return isAdmin
             ? `<select class="swiss-tree-select" data-swiss-tree-slot="${key}.${index}">${teamOptions(vals[index])}</select>`
@@ -2059,6 +2090,7 @@
               : `<span class="slot-name muted">TBD</span>`);
         };
 
+        const side=(team,index)=>`<div class="slot-team ${outcome(team)}">${teamControl(team,index)}${outcome(team)==='swiss-side-winner'?'<span class="swiss-outcome" aria-label="Winner">✓</span>':outcome(team)==='swiss-side-loser'?'<span class="swiss-outcome" aria-label="Lost">×</span>':''}</div>`;
         if(scored){
           const live=liveScoresForTeams(vals[i],vals[i+1],match?.id);
           const scoreA=live?.a ?? scores[i];
@@ -2085,19 +2117,23 @@
           html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
             ${swissMatchStakes(key)}
             ${matchSchedule(match)}
-            <div class="slot-team">${teamControl(a,i)}</div>
+            ${side(a,i)}
             ${middle}
-            <div class="slot-team">${teamControl(b,i+1)}</div>
+            ${side(b,i+1)}
           </div>`;
         }else{
           html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
             ${swissMatchStakes(key)}
             ${matchSchedule(match)}
-            <div class="slot-team">${teamControl(a,i)}</div>
+            ${side(a,i)}
             <div class="vs">VS</div>
-            <div class="slot-team">${teamControl(b,i+1)}</div>
+            ${side(b,i+1)}
           </div>`;
         }
+      }
+      const waiting=(swissWaitingByRecord[key] || []).filter(short=>!vals.includes(short));
+      if(waiting.length){
+        html+=`<div class="swiss-waiting"><span>Awaiting draw · opponents TBD</span><div>${waiting.map(short=>`<span class="swiss-waiting-team">${esc(short)}</span>`).join('')}</div></div>`;
       }
       return html;
     }
@@ -2112,6 +2148,9 @@
           const key=raw.slice(0,dot);
           const index=Number(raw.slice(dot+1));
           fixtures.swiss[key][index]=sel.value||null;
+          fixtures.swissOverrides ||= {};
+          fixtures.swissOverrides[key] ||= {};
+          fixtures.swissOverrides[key][index]=sel.value||null;
           saveAll();
           renderSwissTree();
         });
@@ -2135,7 +2174,7 @@
       $('#swissTree').innerHTML = `
         <div class="swiss-titleline">
           <div>
-            <div style="font-size:20px;font-weight:1000;letter-spacing:-.03em">Swiss Journey</div>
+            <div style="font-size:20px;font-weight:1000;letter-spacing:-.03em">Swiss Journey</div><p class="muted" style="font-size:11px;margin:8px 0 0">✓ Winner · × Lost · Green and red sides mark completed results. Teams awaiting the next draw are listed without assumed pairings.</p>
             
           </div>
           
