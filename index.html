@@ -776,6 +776,25 @@
     .swiss-fixture-team.fixture-winner{background:rgba(83,229,171,.14)}
     .swiss-fixture-team.fixture-loser{background:rgba(229,83,100,.15)}
     .swiss-fixture-team.fixture-loser .slot-logo{filter:grayscale(1);opacity:.55}
+
+    @keyframes live-border-pulse{
+      0%,100%{border-color:#53e5ab;box-shadow:inset 0 0 0 1px rgba(83,229,171,.25),0 0 7px rgba(83,229,171,.14)}
+      50%{border-color:#b3ffdb;box-shadow:inset 0 0 0 1px rgba(83,229,171,.55),0 0 20px rgba(83,229,171,.42)}
+    }
+    .match.is-live,#swissTree .swiss-match.is-live,#knockoutBracket .ko-match.is-live,.swiss-fixture-card.is-live{
+      animation:live-border-pulse 2.4s ease-in-out infinite;
+    }
+    .swiss-center-score>.swiss-side-winner{
+      background:#163b2e !important;color:#85f3bf !important;border-radius:4px;
+      box-shadow:inset 0 0 0 1px rgba(83,229,171,.5);
+    }
+    .swiss-center-score>.swiss-side-loser{
+      background:#49202a !important;color:#ffadb6 !important;border-radius:4px;
+      box-shadow:inset 0 0 0 1px rgba(229,83,100,.45);
+    }
+    @media(prefers-reduced-motion:reduce){
+      .match.is-live,#swissTree .swiss-match.is-live,#knockoutBracket .ko-match.is-live,.swiss-fixture-card.is-live{animation:none}
+    }
   </style>
 </head>
 <body>
@@ -2162,7 +2181,7 @@
               : `<span class="slot-name muted swiss-awaiting-draw" title="Opponent will populate after the official draw">Awaiting draw</span>`);
         };
 
-        const side=(team,index)=>`<div class="slot-team ${outcome(team)}" ${outcome(team)?`aria-label="${esc(team.short)} — ${outcome(team)==='swiss-side-winner'?'Winner':'Lost'}"`:''}>${teamControl(team,index)}</div>`;
+        const side=(team,index)=>`<div class="slot-team" ${outcome(team)?`aria-label="${esc(team.short)} — ${outcome(team)==='swiss-side-winner'?'Winner':'Lost'}"`:''}>${teamControl(team,index)}</div>`;
         if(scored){
           const live=liveScoresForTeams(vals[i],vals[i+1],match?.id);
           const scoreA=live?.a ?? scores[i];
@@ -2170,20 +2189,20 @@
 
           const middle = isAdmin
             ? `<div class="swiss-center-score">
-                 <select class="swiss-score-select" data-swiss-tree-score="${key}.${i}">
+                 <select class="swiss-score-select ${outcome(a)}" data-swiss-tree-score="${key}.${i}">
                    <option value="" ${scoreA==null?'selected':''}>-</option>
                    ${[0,1,2,3].map(n=>`<option value="${n}" ${Number(scoreA)===n?'selected':''}>${n}</option>`).join('')}
                  </select>
                  <span class="vs-word">vs</span>
-                 <select class="swiss-score-select" data-swiss-tree-score="${key}.${i+1}">
+                 <select class="swiss-score-select ${outcome(b)}" data-swiss-tree-score="${key}.${i+1}">
                    <option value="" ${scoreB==null?'selected':''}>-</option>
                    ${[0,1,2,3].map(n=>`<option value="${n}" ${Number(scoreB)===n?'selected':''}>${n}</option>`).join('')}
                  </select>
                </div>`
             : `<div class="swiss-center-score">
-                 <span>${scoreA==null?'-':scoreA}</span>
+                 <span class="${outcome(a)}">${scoreA==null?'-':scoreA}</span>
                  <span class="vs-word">vs</span>
-                 <span>${scoreB==null?'-':scoreB}</span>
+                 <span class="${outcome(b)}">${scoreB==null?'-':scoreB}</span>
                </div>`;
 
           html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
