@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T20:05:22.979841Z",
+  "updated_at": "2026-10-24T20:29:47.353697Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -726,8 +726,8 @@
       "id": 1710943,
       "slug": "2026-10-24-8b523b08-d732-4818-bf73-3efd0f963558",
       "name": "Round 2: LY vs KC",
-      "status": "not_started",
-      "begin_at": "2026-10-24T20:00:00Z",
+      "status": "running",
+      "begin_at": "2026-10-24T20:07:30Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
