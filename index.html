@@ -752,6 +752,15 @@
     .official-team-logo.logo-tile-light{background:#e9edf2}
     img.official-team-logo[hidden],.logo-text-fallback[hidden]{display:none !important}
     .swiss-waiting-team{display:inline-flex;align-items:center;gap:4px}
+
+    /* Full LIVE outlines remain visible on every Swiss and Knockout row. */
+    #swissTree .swiss-match.is-live,
+    #knockoutBracket .ko-match.is-live{
+      border:2px solid #53e5ab;
+      border-radius:6px;
+      background:#16362d;
+      box-shadow:inset 0 0 0 1px rgba(83,229,171,.25),0 0 16px rgba(83,229,171,.18);
+    }
   </style>
 </head>
 <body>
@@ -778,15 +787,14 @@
     </section>
 
     <section id="swiss" class="wrap reveal">
-      <div class="section-head"><div><h2>Swiss Stage</h2><p>Follow each team’s record on the road to Knockout.</p></div><button id="editBtn" class="btn admin-only hidden">Advanced JSON editor</button></div>
+      <div class="section-head"><div><h2>Swiss Stage</h2></div><button id="editBtn" class="btn admin-only hidden">Advanced JSON editor</button></div>
       <div class="swiss-rules" aria-label="How the Swiss stage works">
         <div><strong class="win">3 wins → Knockout</strong><span>Win three matches to qualify.</span></div>
         <div><strong class="loss">3 losses → Eliminated</strong><span>Lose three matches and your run ends.</span></div>
         <div><strong>Same record → Next opponent</strong><span>Each new round pairs teams on the same record. No repeat opponents.</span></div>
       </div>
-      <p class="swiss-record-help">Records count match wins and losses, not individual games. Team records and progress are shown in the draw pools below.</p>
-      <section class="swiss-pools-section" aria-labelledby="swissPoolsTitle">
-        <div class="section-head"><div><h2 id="swissPoolsTitle" style="font-size:20px">Swiss Draw Pools</h2><p>Starting draw pools stay fixed as results change. Records show current Swiss match wins and losses.</p></div><a class="pool-rules-link" href="https://lolesports.com/en-GB/news/worlds-2026-primer" target="_blank" rel="noopener noreferrer">Official draw rules ↗</a></div>
+      <section class="swiss-pools-section" aria-label="Swiss draw pools">
+        <div class="section-head" style="justify-content:flex-end"><a class="pool-rules-link" href="https://lolesports.com/en-GB/news/worlds-2026-primer" target="_blank" rel="noopener noreferrer">Official draw rules ↗</a></div>
         <div id="swissPools" class="swiss-pools-grid"></div>
         <p class="pool-draw-note">Round 1: Pool 1 vs Pool 4 · Pool 2 vs Pool 3. No same-region matchups. Later rounds pair teams with the same record, without repeat opponents.</p>
       </section>
@@ -2171,13 +2179,6 @@
 
     function renderSwissTree(){
       $('#swissTree').innerHTML = `
-        <div class="swiss-titleline">
-          <div>
-            <div style="font-size:20px;font-weight:1000;letter-spacing:-.03em">Swiss Journey</div><p class="muted" style="font-size:11px;margin:8px 0 0">Green = winner · Red = loser · Greyed logos mark defeated teams. Teams awaiting the next draw are listed without assumed pairings.</p>
-            
-          </div>
-          
-        </div>
 <div class="swiss-grid">
           <div class="swiss-col">
             <div class="swiss-box large"><div class="swiss-box-header">0-0</div><div class="swiss-box-body">${swissFixtureRows('0-0')}</div><div class="swiss-note">8 matches · Best of 1</div></div>
