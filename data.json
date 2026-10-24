@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T05:50:41.280214Z",
+  "updated_at": "2026-10-24T06:05:23.046475Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -597,6 +597,48 @@
       ]
     },
     {
+      "id": 1710946,
+      "slug": "2026-10-25-5597a3ca-e083-4fe3-b6ef-201da3e3dd4f",
+      "name": "Round 2: TES vs AL",
+      "status": "not_started",
+      "begin_at": "2026-10-24T17:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 1,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22047,
+        "name": "Group Stage",
+        "slug": "league-of-legends-world-championship-2026-group-stage"
+      },
+      "opponents": [
+        {
+          "id": 126059,
+          "name": "Top Esports",
+          "acronym": "TES",
+          "slug": "top-esports",
+          "score": 0
+        },
+        {
+          "id": 129971,
+          "name": "Anyone's Legend",
+          "acronym": "AL",
+          "slug": "anyone-s-legend",
+          "score": 0
+        }
+      ]
+    },
+    {
       "id": 1710941,
       "slug": "2026-10-24-ce3dadeb-73fc-4fb8-933e-62107026e473",
       "name": "Round 2: CFO vs MKOI",
@@ -639,9 +681,9 @@
       ]
     },
     {
-      "id": 1710942,
-      "slug": "2026-10-24-c581a56c-91c6-4af8-b67f-a7b11726a042",
-      "name": "Round 2: HLE vs GEN",
+      "id": 1710944,
+      "slug": "2026-10-24-ebcc5f72-f227-43e9-ac83-de797fe4592c",
+      "name": "Round 2: G2 vs LOS",
       "status": "not_started",
       "begin_at": "2026-10-24T19:00:00Z",
       "end_at": null,
@@ -665,17 +707,17 @@
       },
       "opponents": [
         {
-          "id": 2883,
-          "name": "Hanwha Life Esports",
-          "acronym": "HLE",
-          "slug": "hanwha-life-esports",
+          "id": 88,
+          "name": "G2 Esports",
+          "acronym": "G2",
+          "slug": "g2-esports",
           "score": 0
         },
         {
-          "id": 2882,
-          "name": "Gen.G",
-          "acronym": "GEN",
-          "slug": "geng",
+          "id": 133796,
+          "name": "LOS",
+          "acronym": "LOS",
+          "slug": "los",
           "score": 0
         }
       ]
@@ -723,53 +765,11 @@
       ]
     },
     {
-      "id": 1710944,
-      "slug": "2026-10-24-ebcc5f72-f227-43e9-ac83-de797fe4592c",
-      "name": "Round 2: G2 vs LOS",
-      "status": "not_started",
-      "begin_at": "2026-10-24T21:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 1,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22047,
-        "name": "Group Stage",
-        "slug": "league-of-legends-world-championship-2026-group-stage"
-      },
-      "opponents": [
-        {
-          "id": 88,
-          "name": "G2 Esports",
-          "acronym": "G2",
-          "slug": "g2-esports",
-          "score": 0
-        },
-        {
-          "id": 133796,
-          "name": "LOS",
-          "acronym": "LOS",
-          "slug": "los",
-          "score": 0
-        }
-      ]
-    },
-    {
       "id": 1710945,
       "slug": "2026-10-25",
       "name": "Round 2: IG vs TSW",
       "status": "not_started",
-      "begin_at": "2026-10-24T22:00:00Z",
+      "begin_at": "2026-10-24T21:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
@@ -807,11 +807,11 @@
       ]
     },
     {
-      "id": 1710946,
-      "slug": "2026-10-25-5597a3ca-e083-4fe3-b6ef-201da3e3dd4f",
-      "name": "Round 2: TES vs AL",
+      "id": 1710942,
+      "slug": "2026-10-24-c581a56c-91c6-4af8-b67f-a7b11726a042",
+      "name": "Round 2: HLE vs GEN",
       "status": "not_started",
-      "begin_at": "2026-10-24T23:00:00Z",
+      "begin_at": "2026-10-24T22:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
@@ -833,17 +833,17 @@
       },
       "opponents": [
         {
-          "id": 126059,
-          "name": "Top Esports",
-          "acronym": "TES",
-          "slug": "top-esports",
+          "id": 2883,
+          "name": "Hanwha Life Esports",
+          "acronym": "HLE",
+          "slug": "hanwha-life-esports",
           "score": 0
         },
         {
-          "id": 129971,
-          "name": "Anyone's Legend",
-          "acronym": "AL",
-          "slug": "anyone-s-legend",
+          "id": 2882,
+          "name": "Gen.G",
+          "acronym": "GEN",
+          "slug": "geng",
           "score": 0
         }
       ]
