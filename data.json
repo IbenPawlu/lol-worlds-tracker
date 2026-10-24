@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T19:05:24.504482Z",
+  "updated_at": "2026-10-24T20:05:22.979841Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -684,10 +684,10 @@
       "id": 1710944,
       "slug": "2026-10-24-ebcc5f72-f227-43e9-ac83-de797fe4592c",
       "name": "Round 2: G2 vs LOS",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-24T19:01:35Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-24T19:47:55Z",
+      "winner_id": 88,
       "number_of_games": 1,
       "league": {
         "id": 297,
@@ -711,7 +711,7 @@
           "name": "G2 Esports",
           "acronym": "G2",
           "slug": "g2-esports",
-          "score": 0
+          "score": 1
         },
         {
           "id": 133796,
