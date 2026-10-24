@@ -804,6 +804,16 @@
     .swiss-fixture-team>strong{text-align:center}
     .fixture-score-head{display:grid;grid-template-columns:minmax(0,1fr) 50px 32px;gap:8px;padding:0 7px;margin-bottom:5px;font-size:8px;font-weight:700;color:var(--muted)}
     .fixture-score-head>span:not(:first-child){text-align:center}
+
+    [data-team-details]{cursor:pointer}
+    [data-team-details]:focus-visible{outline:2px solid #53e5ab;outline-offset:2px}
+    .team-logo-details{position:fixed;z-index:10000;width:min(310px,calc(100vw - 16px));max-height:calc(100dvh - 16px);overflow-y:auto;box-sizing:border-box;padding:16px;border:1px solid #526176;border-radius:14px;background:#101720;color:var(--text);box-shadow:0 18px 45px rgba(0,0,0,.65)}
+    .team-logo-details[hidden]{display:none}
+    .team-logo-details-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .team-logo-details-head strong{display:block;font-size:15px}
+    .team-logo-details-head span{display:block;margin-top:5px;font-size:10px;color:var(--muted)}
+    .team-details-close{display:grid;place-items:center;min-width:30px;min-height:30px;border:1px solid #526176;border-radius:6px;background:#202c3c;color:#fff;font:inherit;cursor:pointer}
+    .team-logo-roster{position:static;margin:0;padding:0}
   </style>
 </head>
 <body>
@@ -1554,7 +1564,7 @@
       if(!team) return '';
       const asset=officialTeamLogos[team.short];
       if(!asset) return esc(team.short);
-      return `<img class="official-team-logo logo-tile-${asset.tone}" src="${esc(asset.src)}" alt="${esc(team.name)} logo" width="128" height="128" loading="lazy" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="logo-text-fallback" hidden>${esc(team.short)}</span>`;
+      return `<img class="official-team-logo logo-tile-${asset.tone}" data-team-details="${esc(team.short)}" tabindex="0" role="button" aria-haspopup="dialog" aria-label="${esc(team.name)} roster and coaches" src="${esc(asset.src)}" alt="${esc(team.name)} logo" width="128" height="128" loading="lazy" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="logo-text-fallback" data-team-details="${esc(team.short)}" tabindex="0" role="button" aria-haspopup="dialog" aria-label="${esc(team.name)} roster and coaches" hidden>${esc(team.short)}</span>`;
     }
 
     function renderFilters(){
@@ -2486,7 +2496,110 @@
       document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
     }
 
+    function setupTeamLogoDetails(){
+      const popup=document.createElement('aside');
+      popup.id='teamLogoDetails';
+      popup.className='team-logo-details';
+      popup.setAttribute('role','dialog');
+      popup.setAttribute('aria-label','Team roster and coaches');
+      popup.hidden=true;
+      document.body.appendChild(popup);
+      let anchor=null,pinned=false,hideTimer=null;
+      const cancelHide=()=>{clearTimeout(hideTimer)};
+      const close=()=>{
+        cancelHide();
+        popup.hidden=true;
+        anchor=null;
+        pinned=false;
+      };
+      const position=()=>{
+        if(popup.hidden || !anchor) return;
+        if(!anchor.isConnected){close();return}
+        const rect=anchor.getBoundingClientRect();
+        const width=popup.offsetWidth,height=popup.offsetHeight;
+        popup.style.left=Math.max(8,Math.min(rect.left,innerWidth-width-8))+'px';
+        const below=rect.bottom+8;
+        popup.style.top=Math.max(8,below+height<=innerHeight-8?below:rect.top-height-8)+'px';
+      };
+      const open=element=>{
+        const team=getTeam(element.dataset.teamDetails);
+        if(!team || !teamRosters[team.short]) return;
+        cancelHide();
+        anchor=element;
+        const roster=rosterPanel(team);
+        // Reuse the card content, but avoid duplicate IDs and toggle controls.
+        const template=document.createElement('template');
+        template.innerHTML=roster;
+        const content=template.content.querySelector('.team-roster');
+        content.removeAttribute('id');
+        content.removeAttribute('hidden');
+        content.className='team-logo-roster';
+        popup.innerHTML=`<div class="team-logo-details-head"><div><strong>${esc(team.name)}</strong><span>${esc(team.region)} · Seed #${esc(team.seed)} · Swiss ${Number(team.wins)||0}–${Number(team.losses)||0}</span></div><button type="button" class="team-details-close" aria-label="Close team details">×</button></div>`;
+        popup.appendChild(content);
+        popup.querySelector('.team-details-close').onclick=()=>{
+          const previous=anchor;
+          close();
+          if(previous?.isConnected){previous.focus();close()}
+        };
+        popup.hidden=false;
+        position();
+      };
+      const scheduleHide=()=>{
+        cancelHide();
+        if(!pinned) hideTimer=setTimeout(()=>{
+          if(!popup.matches(':hover') && !popup.contains(document.activeElement)) close();
+        },180);
+      };
+      document.addEventListener('pointerover',event=>{
+        if(event.pointerType!=='mouse') return;
+        const target=event.target.closest('[data-team-details]');
+        // Team cards already expose these details on hover.
+        if(!target || target.closest('.team[data-roster-team]')) return;
+        if(pinned && anchor!==target) return;
+        open(target);
+      });
+      document.addEventListener('pointerout',event=>{
+        const target=event.target.closest('[data-team-details]');
+        if(target===anchor && !popup.contains(event.relatedTarget)) scheduleHide();
+      });
+      popup.addEventListener('pointerenter',cancelHide);
+      popup.addEventListener('pointerleave',scheduleHide);
+      document.addEventListener('focusin',event=>{
+        const target=event.target.closest('[data-team-details]');
+        if(target){pinned=false;open(target)}
+      });
+      document.addEventListener('focusout',event=>{
+        if((event.target===anchor || popup.contains(event.target)) && !popup.contains(event.relatedTarget) && event.relatedTarget!==anchor) scheduleHide();
+      });
+      document.addEventListener('click',event=>{
+        const target=event.target.closest('[data-team-details]');
+        if(target){
+          if(target.closest('.team[data-roster-team]')){close();return}
+          event.stopPropagation();
+          if(anchor===target && pinned){close();return}
+          pinned=true;
+          open(target);
+          return;
+        }
+        if(!popup.contains(event.target)) close();
+      });
+      document.addEventListener('keydown',event=>{
+        if(event.key==='Escape' && !popup.hidden){close();return}
+        const target=event.target.closest('[data-team-details]');
+        if(target && (event.key==='Enter' || event.key===' ')){
+          event.preventDefault();
+          target.click();
+        }
+      });
+      // Fixed positioning escapes bracket clipping and never moves other cards.
+      window.addEventListener('resize',position);
+      document.addEventListener('scroll',()=>{
+        if(!popup.hidden){if(pinned) position();else close()}
+      },true);
+    }
+
     try{
+      setupTeamLogoDetails();
       renderAll();
       loadLiveScores();
       setInterval(loadLiveScores,60000);
