@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T00:05:26.550222Z",
+  "updated_at": "2026-10-24T00:40:13.102587Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -558,8 +558,8 @@
       "id": 1710938,
       "slug": "2026-10-24-b5b7affe-7c98-4811-9def-c182def75bb1",
       "name": "Round 1: TSW vs LY",
-      "status": "not_started",
-      "begin_at": "2026-10-24T00:05:00Z",
+      "status": "running",
+      "begin_at": "2026-10-24T00:07:24Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
