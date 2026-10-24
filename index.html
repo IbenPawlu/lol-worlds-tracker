@@ -732,6 +732,16 @@
     .playin-team-side.match-side-loser .slot-logo{filter:grayscale(1);opacity:.55}
     .playin-team-side.match-side-loser .slot-name{color:#b6a0a6}
     .swiss-awaiting-draw{font-size:9px;white-space:normal;line-height:1.4}
+
+    /* Full-height result panels, rather than a tight tint around the text. */
+    .match>.slot{align-items:stretch}
+    .match>.slot>.playin-score-mid{align-self:center}
+    .playin-team-side{
+      box-sizing:border-box;min-height:56px;padding:10px 8px;
+      align-self:stretch;
+    }
+    .playin-team-side .slot-name{padding:0;font-size:11px;font-weight:800}
+    .playin-team-side.match-side-winner,.playin-team-side.match-side-loser{border-radius:6px}
   </style>
 </head>
 <body>
@@ -2098,7 +2108,7 @@
               : `<span class="slot-name muted swiss-awaiting-draw" title="Opponent will populate after the official draw">Awaiting draw</span>`);
         };
 
-        const side=(team,index)=>`<div class="slot-team ${outcome(team)}" ${outcome(team)?`aria-label="${esc(team.short)} — ${outcome(team)==='swiss-side-winner'?'Winner':'Lost'}"`:''}>${teamControl(team,index)}${outcome(team)==='swiss-side-loser'?'<span class="swiss-outcome" aria-label="Lost">×</span>':''}</div>`;
+        const side=(team,index)=>`<div class="slot-team ${outcome(team)}" ${outcome(team)?`aria-label="${esc(team.short)} — ${outcome(team)==='swiss-side-winner'?'Winner':'Lost'}"`:''}>${teamControl(team,index)}</div>`;
         if(scored){
           const live=liveScoresForTeams(vals[i],vals[i+1],match?.id);
           const scoreA=live?.a ?? scores[i];
