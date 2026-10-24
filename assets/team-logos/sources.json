@@ -1,0 +1,121 @@
+{
+  "source": "Riot Games / LoL Esports official Worlds 2026 qualifying teams",
+  "retrieved": "2026-10-24",
+  "notes": "Team names and marks belong to their respective owners. Logos downloaded from the image links on the official event page and stored as PNG without changing the artwork.",
+  "teams": [
+    {
+      "short": "AL",
+      "path": "assets/team-logos/al.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "BLG",
+      "path": "assets/team-logos/blg.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "C9",
+      "path": "assets/team-logos/c9.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "CFO",
+      "path": "assets/team-logos/cfo.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "DK",
+      "path": "assets/team-logos/dk.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "FUR",
+      "path": "assets/team-logos/fur.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "light"
+    },
+    {
+      "short": "G2",
+      "path": "assets/team-logos/g2.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "KC",
+      "path": "assets/team-logos/kc.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "LØS",
+      "path": "assets/team-logos/los.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "LYON",
+      "path": "assets/team-logos/lyon.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "MKOI",
+      "path": "assets/team-logos/mkoi.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "MVK",
+      "path": "assets/team-logos/mvk.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "T1",
+      "path": "assets/team-logos/t1.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "light"
+    },
+    {
+      "short": "TES",
+      "path": "assets/team-logos/tes.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "TL",
+      "path": "assets/team-logos/tl.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "TSW",
+      "path": "assets/team-logos/tsw.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "GEN",
+      "path": "assets/team-logos/gen.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "HLE",
+      "path": "assets/team-logos/hle.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    },
+    {
+      "short": "IG",
+      "path": "assets/team-logos/ig.png",
+      "source": "https://lolesports.com/en-GB/tournament/115660540725177488/overview",
+      "tone": "dark"
+    }
+  ]
+}

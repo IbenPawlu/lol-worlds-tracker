@@ -742,6 +742,16 @@
     }
     .playin-team-side .slot-name{padding:0;font-size:11px;font-weight:800}
     .playin-team-side.match-side-winner,.playin-team-side.match-side-loser{border-radius:6px}
+
+    .team-code,.slot-logo,.ko-mini{border-radius:6px !important}
+    .team-code img.official-team-logo,.slot-logo img.official-team-logo,.ko-mini img.official-team-logo{
+      display:block !important;width:100% !important;height:100% !important;
+      object-fit:contain !important;border-radius:4px !important;box-sizing:border-box !important;padding:3px !important;
+    }
+    .official-team-logo.logo-tile-dark{background:#202c3c}
+    .official-team-logo.logo-tile-light{background:#e9edf2}
+    img.official-team-logo[hidden],.logo-text-fallback[hidden]{display:none !important}
+    .swiss-waiting-team{display:inline-flex;align-items:center;gap:4px}
   </style>
 </head>
 <body>
@@ -774,8 +784,7 @@
         <div><strong class="loss">3 losses → Eliminated</strong><span>Lose three matches and your run ends.</span></div>
         <div><strong>Same record → Next opponent</strong><span>Each new round pairs teams on the same record. No repeat opponents.</span></div>
       </div>
-      <p class="swiss-record-help">Records count match wins and losses, not individual games. Each filled marker below represents one match.</p>
-      <div class="card table-card"><table><thead><tr><th>Team</th><th>Region</th><th>Seed</th><th>Record</th><th>Current round</th><th>Status</th></tr></thead><tbody id="swissBody"></tbody></table></div>
+      <p class="swiss-record-help">Records count match wins and losses, not individual games. Team records and progress are shown in the draw pools below.</p>
       <section class="swiss-pools-section" aria-labelledby="swissPoolsTitle">
         <div class="section-head"><div><h2 id="swissPoolsTitle" style="font-size:20px">Swiss Draw Pools</h2><p>Starting draw pools stay fixed as results change. Records show current Swiss match wins and losses.</p></div><a class="pool-rules-link" href="https://lolesports.com/en-GB/news/worlds-2026-primer" target="_blank" rel="noopener noreferrer">Official draw rules ↗</a></div>
         <div id="swissPools" class="swiss-pools-grid"></div>
@@ -1407,6 +1416,92 @@
     const effectiveStatus=t=> (t.wins||0)>=3 ? 'Qualified for Knockout' : (t.losses||0)>=3 ? 'Eliminated' : (t.status || 'Swiss');
     const statusClass=t=> (t.wins||0)>=3 ? 's-q' : (t.losses||0)>=3 ? 's-e' : (t.status||'')==='Play-In' ? 's-playin' : 's-active';
 
+
+    const officialTeamLogos={
+  "AL": {
+    "src": "assets/team-logos/al.png",
+    "tone": "dark"
+  },
+  "BLG": {
+    "src": "assets/team-logos/blg.png",
+    "tone": "dark"
+  },
+  "C9": {
+    "src": "assets/team-logos/c9.png",
+    "tone": "dark"
+  },
+  "CFO": {
+    "src": "assets/team-logos/cfo.png",
+    "tone": "dark"
+  },
+  "DK": {
+    "src": "assets/team-logos/dk.png",
+    "tone": "dark"
+  },
+  "FUR": {
+    "src": "assets/team-logos/fur.png",
+    "tone": "light"
+  },
+  "G2": {
+    "src": "assets/team-logos/g2.png",
+    "tone": "dark"
+  },
+  "KC": {
+    "src": "assets/team-logos/kc.png",
+    "tone": "dark"
+  },
+  "LØS": {
+    "src": "assets/team-logos/los.png",
+    "tone": "dark"
+  },
+  "LYON": {
+    "src": "assets/team-logos/lyon.png",
+    "tone": "dark"
+  },
+  "MKOI": {
+    "src": "assets/team-logos/mkoi.png",
+    "tone": "dark"
+  },
+  "MVK": {
+    "src": "assets/team-logos/mvk.png",
+    "tone": "dark"
+  },
+  "T1": {
+    "src": "assets/team-logos/t1.png",
+    "tone": "light"
+  },
+  "TES": {
+    "src": "assets/team-logos/tes.png",
+    "tone": "dark"
+  },
+  "TL": {
+    "src": "assets/team-logos/tl.png",
+    "tone": "dark"
+  },
+  "TSW": {
+    "src": "assets/team-logos/tsw.png",
+    "tone": "dark"
+  },
+  "GEN": {
+    "src": "assets/team-logos/gen.png",
+    "tone": "dark"
+  },
+  "HLE": {
+    "src": "assets/team-logos/hle.png",
+    "tone": "dark"
+  },
+  "IG": {
+    "src": "assets/team-logos/ig.png",
+    "tone": "dark"
+  }
+};
+    function teamLogo(team){
+      if(!team) return '';
+      const asset=officialTeamLogos[team.short];
+      if(!asset) return esc(team.short);
+      return `<img class="official-team-logo logo-tile-${asset.tone}" src="${esc(asset.src)}" alt="${esc(team.name)} logo" width="128" height="128" loading="lazy" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="logo-text-fallback" hidden>${esc(team.short)}</span>`;
+    }
+
     function renderFilters(){
       const regs=['ALL','LCK','LPL','LEC','LCS','LCP','CBLOL'];
       $('#filters').innerHTML = regs.map(r => `<button class="btn filter ${region===r?'active':''}" data-r="${r}">${r}</button>`).join('');
@@ -1723,7 +1818,7 @@
         <div class="team${eliminated.has(t.short)?' is-eliminated':''}" data-roster-team="${esc(t.short)}" ${eliminated.has(t.short)?'aria-label="'+esc(t.name)+' — Eliminated"':''}>
           <div class="team-top">
             <div class="team-main">
-              <div class="team-code" style="color:${colors[t.region]}">${esc(t.logo || t.short)}</div>
+              <div class="team-code" style="color:${colors[t.region]}">${teamLogo(t)}</div>
               <div style="min-width:0">
                 <div class="team-name">${esc(t.name)}</div>
                 <div class="meta"><i class="region-dot" style="color:${colors[t.region]}"></i>${t.region}<span>•</span>${t.start}</div>
@@ -1820,8 +1915,8 @@
       }
       return `<div class="playin-team-side ${side}${outcome}">
         ${side==='left'
-          ? `<span class="slot-logo" style="color:${colors[t.region]}">${esc(t.logo||t.short)}</span><span class="slot-name">${esc(t.short)}</span>`
-          : `<span class="slot-name">${esc(t.short)}</span><span class="slot-logo" style="color:${colors[t.region]}">${esc(t.logo||t.short)}</span>`}
+          ? `<span class="slot-logo" style="color:${colors[t.region]}">${teamLogo(t)}</span><span class="slot-name">${esc(t.short)}</span>`
+          : `<span class="slot-name">${esc(t.short)}</span><span class="slot-logo" style="color:${colors[t.region]}">${teamLogo(t)}</span>`}
       </div>`;
     }
 
@@ -1946,8 +2041,8 @@
             const wins=Number(team?.wins)||0,losses=Number(team?.losses)||0;
             const label=team?.name || (short ? short : 'Play-In winner');
             return `<li class="swiss-pool-team">
-              <span class="team-code" style="color:${team?colors[team.region]:'var(--muted)'}">${esc(team?.logo || team?.short || 'TBD')}</span>
-              <div class="swiss-pool-identity"><div class="swiss-pool-name">${esc(label)}</div><div class="swiss-pool-region">${team?esc(team.region)+(short?'':' · Play-In qualifier'):'Awaiting confirmation'}</div></div>
+              <span class="team-code" style="color:${team?colors[team.region]:'var(--muted)'}">${team?teamLogo(team):'TBD'}</span>
+              <div class="swiss-pool-identity"><div class="swiss-pool-name">${esc(label)}</div><div class="swiss-pool-region">${team?esc(team.region)+' · Regional seed #'+esc(team.seed)+(short?'':' · Play-In qualifier'):'Awaiting confirmation'}</div>${team?swissProgress(wins,losses):''}</div>
               <span class="swiss-pool-record" aria-label="${team?wins+' Swiss wins, '+losses+' Swiss losses':'Team to be determined'}">${team?`<span class="win">${wins}</span><span class="muted">–</span><span class="loss">${losses}</span>`:'TBD'}</span>
             </li>`;
           }).join('')}</ul>
@@ -1968,123 +2063,9 @@
       return `<div class="swiss-match-stakes ${both?'decider':wins===2?'qualifier':'eliminator'}">${label}</div>`;
     }
 
+    // Existing refresh/admin hooks now update the consolidated pool cards.
     function renderSwissTable(){
       renderSwissPools();
-      const arr=swissStandingsEntries();
-
-      $('#swissBody').innerHTML = arr.map((t,index) => {
-        const wins=t?.wins||0, losses=t?.losses||0;
-        const games=wins+losses;
-        const round=!t ? '—' : (wins>=3 || losses>=3 ? '—' : 'Round '+Math.min(games+1,5));
-
-        const teamCell = isAdmin
-          ? `<select class="swiss-team-select" data-swiss-lineup="${index}">
-               ${teamOptions(t?.short || null)}
-             </select>`
-          : (t
-              ? `<div class="table-team-btn"><span class="team-code" style="width:34px;height:34px;border-radius:10px;font-size:10px;color:${colors[t.region]}">${esc(t.logo||t.short)}</span><span style="font-weight:800">${esc(t.name)}</span></div>`
-              : `<div class="table-team-btn"><span class="team-code" style="width:34px;height:34px;border-radius:10px;font-size:10px;color:var(--muted)">TBD</span><span style="font-weight:800">TBD</span></div>`);
-
-        const recordCell = !t
-          ? `<span class="muted">0–0</span>`
-          : (isAdmin
-            ? `<select class="swiss-inline-select" data-swiss-wins="${esc(t.short)}">${[0,1,2,3].map(n=>`<option value="${n}" ${wins===n?'selected':''}>${n}</option>`).join('')}</select>
-               <span class="muted">–</span>
-               <select class="swiss-inline-select" data-swiss-losses="${esc(t.short)}">${[0,1,2,3].map(n=>`<option value="${n}" ${losses===n?'selected':''}>${n}</option>`).join('')}</select>`
-            : `<span class="win">${wins}</span><span class="muted">–</span><span class="loss">${losses}</span>`);
-
-        const currentState = !t ? '' : (wins>=3?'Qualified':losses>=3?'Eliminated':(fixtures.swissStatus[t.short] || 'Swiss'));
-        const statusCell = !t
-          ? `<span class="muted">TBD</span>`
-          : (isAdmin
-            ? `<select class="swiss-inline-select swiss-status-select" data-swiss-status="${esc(t.short)}">
-                 <option value="" ${currentState===''?'selected':''}>Select status</option>
-                 ${['Swiss','Qualified','Eliminated'].map(s=>`<option value="${s}" ${currentState===s?'selected':''}>${s}</option>`).join('')}
-               </select>`
-            : (currentState
-                ? `<span class="status"><i class="${currentState==='Qualified'?'green':currentState==='Eliminated'?'red':'amber'}"></i>${esc(currentState)}</span>`
-                : `<span class="muted">—</span>`));
-
-        return `<tr ${isAdmin ? `draggable="true" data-swiss-row="${index}"` : ''}>
-          <td>${isAdmin ? '<span class="swiss-drag-handle" title="Drag to reorder">⋮⋮</span>' : ''}${teamCell}</td>
-          <td>${t ? `<span class="status"><i class="region-dot" style="color:${colors[t.region]}"></i>${esc(t.region)}</span>` : '<span class="muted">—</span>'}</td>
-          <td>${t ? `#${t.seed}` : '—'}</td>
-          <td class="record"><div>${recordCell}</div>${t?swissProgress(wins,losses):''}</td>
-          <td>${round}</td>
-          <td>${statusCell}</td>
-        </tr>`;
-      }).join('');
-
-      if(isAdmin){
-        $('#swissBody').querySelectorAll('[data-swiss-lineup]').forEach(sel=>{
-          sel.addEventListener('change',()=>{
-            const index=Number(sel.dataset.swissLineup);
-            fixtures.swissLineup[index]=sel.value||null;
-            saveAll();
-            renderSwissTable();
-          });
-        });
-
-        let dragFrom=null;
-        $('#swissBody').querySelectorAll('tr[draggable="true"]').forEach(row=>{
-          row.addEventListener('dragstart',e=>{
-            dragFrom=Number(row.dataset.swissRow);
-            row.classList.add('dragging');
-            e.dataTransfer.effectAllowed='move';
-            e.dataTransfer.setData('text/plain',String(dragFrom));
-          });
-          row.addEventListener('dragend',()=>{
-            row.classList.remove('dragging');
-            $('#swissBody').querySelectorAll('.drag-over').forEach(r=>r.classList.remove('drag-over'));
-          });
-          row.addEventListener('dragover',e=>{
-            e.preventDefault();
-            row.classList.add('drag-over');
-            e.dataTransfer.dropEffect='move';
-          });
-          row.addEventListener('dragleave',()=>row.classList.remove('drag-over'));
-          row.addEventListener('drop',e=>{
-            e.preventDefault();
-            row.classList.remove('drag-over');
-            const to=Number(row.dataset.swissRow);
-            const from=dragFrom ?? Number(e.dataTransfer.getData('text/plain'));
-            if(Number.isNaN(from) || Number.isNaN(to) || from===to) return;
-            const [moved]=fixtures.swissLineup.splice(from,1);
-            fixtures.swissLineup.splice(to,0,moved);
-            saveAll();
-            renderSwissTable();
-          });
-        });
-
-        const updateSwissTeam=(short)=>{
-          const t=getTeam(short);
-          if(!t) return;
-
-          const w=document.querySelector(`[data-swiss-wins="${CSS.escape(short)}"]`);
-          const l=document.querySelector(`[data-swiss-losses="${CSS.escape(short)}"]`);
-          const s=document.querySelector(`[data-swiss-status="${CSS.escape(short)}"]`);
-
-          if(w) t.wins=Number(w.value);
-          if(l) t.losses=Number(l.value);
-
-          if(s){
-            fixtures.swissStatus[t.short]=s.value||'';
-          }
-
-          saveAll();
-          renderSwissTable();
-          renderSwissTree();
-          renderKnockout();
-          renderTeams();
-        };
-
-        $('#swissBody').querySelectorAll('[data-swiss-wins],[data-swiss-losses],[data-swiss-status]').forEach(sel=>{
-          sel.addEventListener('click',e=>e.stopPropagation());
-          sel.addEventListener('change',()=>updateSwissTeam(
-            sel.dataset.swissWins || sel.dataset.swissLosses || sel.dataset.swissStatus
-          ));
-        });
-      }
     }
 
     function swissFixtureRows(key){
@@ -2104,7 +2085,7 @@
           return isAdmin
             ? `<select class="swiss-tree-select" data-swiss-tree-slot="${key}.${index}">${teamOptions(vals[index])}</select>`
             : (team
-              ? `<span style="display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;width:100%"><span class="slot-logo" style="color:${colors[team.region]}">${esc(team.logo||team.short)}</span><span class="slot-name">${esc(team.short)}</span></span>`
+              ? `<span style="display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;width:100%"><span class="slot-logo" style="color:${colors[team.region]}">${teamLogo(team)}</span><span class="slot-name">${esc(team.short)}</span></span>`
               : `<span class="slot-name muted swiss-awaiting-draw" title="Opponent will populate after the official draw">Awaiting draw</span>`);
         };
 
@@ -2151,7 +2132,7 @@
       }
       const waiting=(swissWaitingByRecord[key] || []).filter(short=>!vals.includes(short));
       if(waiting.length){
-        html+=`<div class="swiss-waiting"><span>Awaiting draw · opponents TBD</span><div>${waiting.map(short=>`<span class="swiss-waiting-team">${esc(short)}</span>`).join('')}</div></div>`;
+        html+=`<div class="swiss-waiting"><span>Awaiting draw · opponents TBD</span><div>${waiting.map(short=>`<span class="swiss-waiting-team"><span class="slot-logo">${teamLogo(getTeam(short))}</span>${esc(short)}</span>`).join('')}</div></div>`;
       }
       return html;
     }
@@ -2236,8 +2217,8 @@
       }
       return `<div class="ko-team-side ${side}">
         ${side==='left'
-          ? `<span class="ko-mini" style="color:${colors[t.region]}">${esc(t.logo||t.short)}</span><span class="ko-code">${esc(t.short)}</span>`
-          : `<span class="ko-code">${esc(t.short)}</span><span class="ko-mini" style="color:${colors[t.region]}">${esc(t.logo||t.short)}</span>`}
+          ? `<span class="ko-mini" style="color:${colors[t.region]}">${teamLogo(t)}</span><span class="ko-code">${esc(t.short)}</span>`
+          : `<span class="ko-code">${esc(t.short)}</span><span class="ko-mini" style="color:${colors[t.region]}">${teamLogo(t)}</span>`}
       </div>`;
     }
 
