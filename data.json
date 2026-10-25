@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T00:05:26.945448Z",
+  "updated_at": "2026-10-25T01:05:22.993179Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -894,8 +894,8 @@
       "id": 1710947,
       "slug": "2026-10-25-06474646-4e3a-4be8-ba0a-e151b37f8de5",
       "name": "Round 2: TL vs BLG",
-      "status": "not_started",
-      "begin_at": "2026-10-25T00:20:00Z",
+      "status": "running",
+      "begin_at": "2026-10-25T00:21:24Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
