@@ -814,6 +814,11 @@
     .team-logo-details-head span{display:block;margin-top:5px;font-size:10px;color:var(--muted)}
     .team-details-close{display:grid;place-items:center;min-width:30px;min-height:30px;border:1px solid #526176;border-radius:6px;background:#202c3c;color:#fff;font:inherit;cursor:pointer}
     .team-logo-roster{position:static;margin:0;padding:0}
+
+    #swissTree .journey-match-schedule{grid-column:1 / -1;display:flex;justify-content:center;align-items:center;gap:5px 8px;width:100%;padding:7px 0;color:#e1e7ef}
+    .journey-match-schedule time{display:flex;flex-direction:column;align-items:center;gap:3px}
+    .journey-match-date{font-size:10px;font-weight:800}
+    .journey-match-time{font-size:10px;font-weight:600;color:#b9c8d8}
   </style>
 </head>
 <body>
@@ -1033,14 +1038,14 @@
       return match;
     }
 
-    function matchSchedule(match){
+    function matchSchedule(match,detailed=false){
       const date=match?.begin_at ? new Date(match.begin_at) : null;
       const valid=date && !Number.isNaN(date.getTime());
       const running=String(match?.status || '').toLowerCase()==='running';
       const time=valid
-        ? `<time datetime="${esc(date.toISOString())}" title="${esc(date.toUTCString())}">${esc(new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(date))}</time>`
+        ? `<time datetime="${esc(date.toISOString())}" title="${esc(date.toUTCString())}">${detailed?`<span class="journey-match-date">${esc(new Intl.DateTimeFormat(undefined,{weekday:'short',month:'short',day:'numeric'}).format(date))}</span><span class="journey-match-time">${esc(new Intl.DateTimeFormat(undefined,{hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(date))}</span>`:esc(new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(date))}</time>`
         : '<span>Time TBD</span>';
-      return `<div class="match-schedule">${running?'<span class="match-live-badge"><span aria-hidden="true">●</span> LIVE</span>':''}${time}</div>`;
+      return `<div class="match-schedule${detailed?' journey-match-schedule':''}">${running?'<span class="match-live-badge"><span aria-hidden="true">●</span> LIVE</span>':''}${time}</div>`;
     }
     const matchLiveClass=match=>String(match?.status || '').toLowerCase()==='running'?' is-live':'';
 
@@ -2232,7 +2237,7 @@
 
           html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
             ${swissMatchStakes(key)}
-            ${matchSchedule(match)}
+            ${matchSchedule(match,true)}
             ${side(a,i)}
             ${middle}
             ${side(b,i+1)}
@@ -2240,7 +2245,7 @@
         }else{
           html += `<div class="swiss-match${matchLiveClass(match)}" ${match?`data-match-id="${esc(match.id)}"`:''}>
             ${swissMatchStakes(key)}
-            ${matchSchedule(match)}
+            ${matchSchedule(match,true)}
             ${side(a,i)}
             <div class="vs">VS</div>
             ${side(b,i+1)}
