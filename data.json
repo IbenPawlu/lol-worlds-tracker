@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T01:05:22.993179Z",
+  "updated_at": "2026-10-25T01:08:43.640289Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -894,10 +894,10 @@
       "id": 1710947,
       "slug": "2026-10-25-06474646-4e3a-4be8-ba0a-e151b37f8de5",
       "name": "Round 2: TL vs BLG",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-25T00:21:24Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-25T01:06:58Z",
+      "winner_id": 1566,
       "number_of_games": 1,
       "league": {
         "id": 297,
@@ -928,7 +928,7 @@
           "name": "Bilibili Gaming",
           "acronym": "BLG",
           "slug": "bilibili-gaming",
-          "score": 0
+          "score": 1
         }
       ]
     },
