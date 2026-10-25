@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T07:05:26.555499Z",
+  "updated_at": "2026-10-25T08:05:24.970331Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -933,53 +933,11 @@
       ]
     },
     {
-      "id": 1710953,
-      "slug": "2026-10-25-80265d09-c865-4030-b1a5-972801f59ca2",
-      "name": "Round 3: TES vs G2",
-      "status": "not_started",
-      "begin_at": "2026-10-25T17:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 1,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22047,
-        "name": "Group Stage",
-        "slug": "league-of-legends-world-championship-2026-group-stage"
-      },
-      "opponents": [
-        {
-          "id": 126059,
-          "name": "Top Esports",
-          "acronym": "TES",
-          "slug": "top-esports",
-          "score": 0
-        },
-        {
-          "id": 88,
-          "name": "G2 Esports",
-          "acronym": "G2",
-          "slug": "g2-esports",
-          "score": 0
-        }
-      ]
-    },
-    {
       "id": 1710954,
       "slug": "2026-10-25-0668d46f-9b1f-4414-af47-633295c0237e",
       "name": "Round 3: HLE vs IG",
       "status": "not_started",
-      "begin_at": "2026-10-25T18:00:00Z",
+      "begin_at": "2026-10-25T17:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
@@ -1017,14 +975,14 @@
       ]
     },
     {
-      "id": 1710955,
-      "slug": "2026-10-25-6cb90f3c-7269-4701-b942-a5a21c538c3b",
-      "name": "Round 3: GEN vs LY",
+      "id": 1710953,
+      "slug": "2026-10-25-80265d09-c865-4030-b1a5-972801f59ca2",
+      "name": "Round 3: TES vs G2",
       "status": "not_started",
-      "begin_at": "2026-10-25T19:00:00Z",
+      "begin_at": "2026-10-25T18:00:00Z",
       "end_at": null,
       "winner_id": null,
-      "number_of_games": 3,
+      "number_of_games": 1,
       "league": {
         "id": 297,
         "name": "Worlds",
@@ -1043,17 +1001,17 @@
       },
       "opponents": [
         {
-          "id": 2882,
-          "name": "Gen.G",
-          "acronym": "GEN",
-          "slug": "geng",
+          "id": 126059,
+          "name": "Top Esports",
+          "acronym": "TES",
+          "slug": "top-esports",
           "score": 0
         },
         {
-          "id": 136066,
-          "name": "LYON",
-          "acronym": "LY",
-          "slug": "lyon",
+          "id": 88,
+          "name": "G2 Esports",
+          "acronym": "G2",
+          "slug": "g2-esports",
           "score": 0
         }
       ]
@@ -1063,7 +1021,7 @@
       "slug": "2026-10-25-fa30fd30-e20a-44d9-ab4f-2ed62575fc5d",
       "name": "Round 3: DK vs MKOI",
       "status": "not_started",
-      "begin_at": "2026-10-25T22:00:00Z",
+      "begin_at": "2026-10-25T19:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1101,14 +1059,14 @@
       ]
     },
     {
-      "id": 1710997,
-      "slug": "2026-10-26",
-      "name": "Round 3: KC vs BLG",
+      "id": 1710955,
+      "slug": "2026-10-25-6cb90f3c-7269-4701-b942-a5a21c538c3b",
+      "name": "Round 3: GEN vs LY",
       "status": "not_started",
-      "begin_at": "2026-10-26T17:00:00Z",
+      "begin_at": "2026-10-25T22:00:00Z",
       "end_at": null,
       "winner_id": null,
-      "number_of_games": 1,
+      "number_of_games": 3,
       "league": {
         "id": 297,
         "name": "Worlds",
@@ -1127,17 +1085,17 @@
       },
       "opponents": [
         {
-          "id": 134078,
-          "name": "Karmine Corp",
-          "acronym": "KC",
-          "slug": "karmine-corp-academy",
+          "id": 2882,
+          "name": "Gen.G",
+          "acronym": "GEN",
+          "slug": "geng",
           "score": 0
         },
         {
-          "id": 1566,
-          "name": "Bilibili Gaming",
-          "acronym": "BLG",
-          "slug": "bilibili-gaming",
+          "id": 136066,
+          "name": "LYON",
+          "acronym": "LY",
+          "slug": "lyon",
           "score": 0
         }
       ]
@@ -1147,7 +1105,7 @@
       "slug": "2026-10-26-642c599d-05f1-491c-9dea-97516b9a2242",
       "name": "Round 3: T1 vs CFO",
       "status": "not_started",
-      "begin_at": "2026-10-26T18:00:00Z",
+      "begin_at": "2026-10-26T17:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
@@ -1180,6 +1138,48 @@
           "name": "CTBC Flying Oyster",
           "acronym": "CFO",
           "slug": "ctbc-flying-oyster",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1710997,
+      "slug": "2026-10-26",
+      "name": "Round 3: KC vs BLG",
+      "status": "not_started",
+      "begin_at": "2026-10-26T18:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 1,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22047,
+        "name": "Group Stage",
+        "slug": "league-of-legends-world-championship-2026-group-stage"
+      },
+      "opponents": [
+        {
+          "id": 134078,
+          "name": "Karmine Corp",
+          "acronym": "KC",
+          "slug": "karmine-corp-academy",
+          "score": 0
+        },
+        {
+          "id": 1566,
+          "name": "Bilibili Gaming",
+          "acronym": "BLG",
+          "slug": "bilibili-gaming",
           "score": 0
         }
       ]
