@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T19:05:24.855247Z",
+  "updated_at": "2026-10-25T20:05:26.919540Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1020,8 +1020,8 @@
       "id": 1710956,
       "slug": "2026-10-25-fa30fd30-e20a-44d9-ab4f-2ed62575fc5d",
       "name": "Round 3: DK vs MKOI",
-      "status": "not_started",
-      "begin_at": "2026-10-25T19:10:00Z",
+      "status": "running",
+      "begin_at": "2026-10-25T19:06:36Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1047,7 +1047,7 @@
           "name": "Dplus KIA",
           "acronym": "DK",
           "slug": "dplus-kia",
-          "score": 0
+          "score": 1
         },
         {
           "id": 126536,
