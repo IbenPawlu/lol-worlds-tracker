@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T16:14:51.716170Z",
+  "updated_at": "2026-10-25T17:05:24.339291Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -937,7 +937,7 @@
       "slug": "2026-10-25-0668d46f-9b1f-4414-af47-633295c0237e",
       "name": "Round 3: HLE vs IG",
       "status": "not_started",
-      "begin_at": "2026-10-25T17:00:00Z",
+      "begin_at": "2026-10-25T17:05:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
