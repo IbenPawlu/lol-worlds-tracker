@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T21:05:25.334200Z",
+  "updated_at": "2026-10-25T21:46:01.078572Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1096,7 +1096,7 @@
           "name": "LYON",
           "acronym": "LY",
           "slug": "lyon",
-          "score": 0
+          "score": 1
         }
       ]
     },
