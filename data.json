@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T16:05:28.547083Z",
+  "updated_at": "2026-10-26T17:05:27.433689Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1105,7 +1105,7 @@
       "slug": "2026-10-26-642c599d-05f1-491c-9dea-97516b9a2242",
       "name": "Round 3: T1 vs CFO",
       "status": "not_started",
-      "begin_at": "2026-10-26T17:00:00Z",
+      "begin_at": "2026-10-26T17:05:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 1,
