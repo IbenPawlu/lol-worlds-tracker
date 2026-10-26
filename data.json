@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T23:05:27.588512Z",
+  "updated_at": "2026-10-26T00:05:27.052627Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1062,10 +1062,10 @@
       "id": 1710955,
       "slug": "2026-10-25-6cb90f3c-7269-4701-b942-a5a21c538c3b",
       "name": "Round 3: GEN vs LY",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-25T20:53:50Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-25T23:17:38Z",
+      "winner_id": 2882,
       "number_of_games": 3,
       "league": {
         "id": 297,
@@ -1089,7 +1089,7 @@
           "name": "Gen.G",
           "acronym": "GEN",
           "slug": "geng",
-          "score": 1
+          "score": 2
         },
         {
           "id": 136066,
