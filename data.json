@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T19:17:16.140832Z",
+  "updated_at": "2026-10-26T20:05:26.173745Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1215,7 +1215,7 @@
           "name": "LOS",
           "acronym": "LOS",
           "slug": "los",
-          "score": 0
+          "score": 1
         },
         {
           "id": 136073,
