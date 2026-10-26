@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T22:05:25.228555Z",
+  "updated_at": "2026-10-26T22:55:12.929577Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1230,10 +1230,10 @@
       "id": 1711000,
       "slug": "2026-10-26-81ed4e09-b6a9-4590-bb07-09185ccaa319",
       "name": "Round 3: TL vs AL",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-26T20:58:03Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-26T22:45:22Z",
+      "winner_id": 390,
       "number_of_games": 3,
       "league": {
         "id": 297,
@@ -1257,7 +1257,7 @@
           "name": "Team Liquid",
           "acronym": "TL",
           "slug": "liquid",
-          "score": 1
+          "score": 2
         },
         {
           "id": 129971,
