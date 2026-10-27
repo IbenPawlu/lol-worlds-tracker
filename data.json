@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-27T00:05:28.912027Z",
+  "updated_at": "2026-10-27T01:05:27.585613Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1269,9 +1269,9 @@
       ]
     },
     {
-      "id": 1711001,
-      "slug": "2026-10-28",
-      "name": "Round 4: TES vs BLG",
+      "id": 1711003,
+      "slug": "2026-10-29",
+      "name": "Round 4: MKOI vs T1",
       "status": "not_started",
       "begin_at": "2026-10-28T20:00:00Z",
       "end_at": null,
@@ -1295,17 +1295,17 @@
       },
       "opponents": [
         {
-          "id": 126059,
-          "name": "Top Esports",
-          "acronym": "TES",
-          "slug": "top-esports",
+          "id": 126536,
+          "name": "Movistar KOI",
+          "acronym": "MKOI",
+          "slug": "mad-lions-league-of-legends",
           "score": 0
         },
         {
-          "id": 1566,
-          "name": "Bilibili Gaming",
-          "acronym": "BLG",
-          "slug": "bilibili-gaming",
+          "id": 126061,
+          "name": "T1",
+          "acronym": "T1",
+          "slug": "t1",
           "score": 0
         }
       ]
@@ -1353,53 +1353,11 @@
       ]
     },
     {
-      "id": 1711003,
-      "slug": "2026-10-29",
-      "name": "Round 4: MKOI vs T1",
-      "status": "not_started",
-      "begin_at": "2026-10-29T20:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 3,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22047,
-        "name": "Group Stage",
-        "slug": "league-of-legends-world-championship-2026-group-stage"
-      },
-      "opponents": [
-        {
-          "id": 126536,
-          "name": "Movistar KOI",
-          "acronym": "MKOI",
-          "slug": "mad-lions-league-of-legends",
-          "score": 0
-        },
-        {
-          "id": 126061,
-          "name": "T1",
-          "acronym": "T1",
-          "slug": "t1",
-          "score": 0
-        }
-      ]
-    },
-    {
       "id": 1711004,
       "slug": "2026-10-30",
       "name": "Round 4: KC vs CFO",
       "status": "not_started",
-      "begin_at": "2026-10-29T23:00:00Z",
+      "begin_at": "2026-10-29T20:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1432,6 +1390,48 @@
           "name": "CTBC Flying Oyster",
           "acronym": "CFO",
           "slug": "ctbc-flying-oyster",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1711001,
+      "slug": "2026-10-28",
+      "name": "Round 4: TES vs BLG",
+      "status": "not_started",
+      "begin_at": "2026-10-29T23:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 3,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22047,
+        "name": "Group Stage",
+        "slug": "league-of-legends-world-championship-2026-group-stage"
+      },
+      "opponents": [
+        {
+          "id": 126059,
+          "name": "Top Esports",
+          "acronym": "TES",
+          "slug": "top-esports",
+          "score": 0
+        },
+        {
+          "id": 1566,
+          "name": "Bilibili Gaming",
+          "acronym": "BLG",
+          "slug": "bilibili-gaming",
           "score": 0
         }
       ]
