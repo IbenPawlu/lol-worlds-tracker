@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T20:05:26.696970Z",
+  "updated_at": "2026-10-28T21:01:32.108553Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1272,8 +1272,8 @@
       "id": 1711003,
       "slug": "2026-10-29",
       "name": "Round 4: MKOI vs T1",
-      "status": "not_started",
-      "begin_at": "2026-10-28T20:05:00Z",
+      "status": "running",
+      "begin_at": "2026-10-28T20:06:46Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1306,7 +1306,7 @@
           "name": "T1",
           "acronym": "T1",
           "slug": "t1",
-          "score": 0
+          "score": 1
         }
       ]
     },
