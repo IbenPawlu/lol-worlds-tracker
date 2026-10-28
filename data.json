@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T22:05:25.886147Z",
+  "updated_at": "2026-10-28T23:05:25.173259Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1341,7 +1341,7 @@
           "name": "Invictus Gaming",
           "acronym": "IG",
           "slug": "invictus-gaming",
-          "score": 0
+          "score": 1
         },
         {
           "id": 136066,
