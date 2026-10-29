@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29T19:39:43.742718Z",
+  "updated_at": "2026-10-29T21:05:27.646610Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1356,8 +1356,8 @@
       "id": 1711004,
       "slug": "2026-10-30",
       "name": "Round 4: KC vs CFO",
-      "status": "not_started",
-      "begin_at": "2026-10-29T20:00:00Z",
+      "status": "running",
+      "begin_at": "2026-10-29T20:05:50Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1383,7 +1383,7 @@
           "name": "Karmine Corp",
           "acronym": "KC",
           "slug": "karmine-corp-academy",
-          "score": 0
+          "score": 1
         },
         {
           "id": 130355,
