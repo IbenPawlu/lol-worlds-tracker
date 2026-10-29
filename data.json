@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29T00:05:27.980694Z",
+  "updated_at": "2026-10-29T00:54:00.062012Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1314,10 +1314,10 @@
       "id": 1711002,
       "slug": "2026-10-28-a2dd8efd-fefe-48a1-ae2d-ff03a92eff6b",
       "name": "Round 4: IG vs LY",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-28T21:56:33Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-29T00:15:53Z",
+      "winner_id": 411,
       "number_of_games": 3,
       "league": {
         "id": 297,
@@ -1341,7 +1341,7 @@
           "name": "Invictus Gaming",
           "acronym": "IG",
           "slug": "invictus-gaming",
-          "score": 1
+          "score": 2
         },
         {
           "id": 136066,
