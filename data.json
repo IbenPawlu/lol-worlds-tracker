@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T21:05:27.510312Z",
+  "updated_at": "2026-10-30T22:05:27.799158Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1467,7 +1467,7 @@
           "name": "Team Liquid",
           "acronym": "TL",
           "slug": "liquid",
-          "score": 0
+          "score": 1
         },
         {
           "id": 133796,
