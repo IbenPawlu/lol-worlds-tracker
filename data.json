@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T20:05:26.914459Z",
+  "updated_at": "2026-10-30T21:05:27.510312Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1440,8 +1440,8 @@
       "id": 1711005,
       "slug": "2026-10-30-5a170f4c-750a-4622-a6ed-3673b75b0022",
       "name": "Round 4: TL vs LOS",
-      "status": "not_started",
-      "begin_at": "2026-10-30T20:05:00Z",
+      "status": "running",
+      "begin_at": "2026-10-30T20:13:42Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1474,7 +1474,7 @@
           "name": "LOS",
           "acronym": "LOS",
           "slug": "los",
-          "score": 0
+          "score": 1
         }
       ]
     },
