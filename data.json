@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T00:05:26.611174Z",
+  "updated_at": "2026-10-30T01:05:27.084308Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1398,10 +1398,10 @@
       "id": 1711001,
       "slug": "2026-10-28",
       "name": "Round 4: TES vs BLG",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-29T22:32:45Z",
-      "end_at": null,
-      "winner_id": null,
+      "end_at": "2026-10-30T00:53:45Z",
+      "winner_id": 126059,
       "number_of_games": 3,
       "league": {
         "id": 297,
@@ -1425,7 +1425,7 @@
           "name": "Top Esports",
           "acronym": "TES",
           "slug": "top-esports",
-          "score": 0
+          "score": 2
         },
         {
           "id": 1566,
