@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T17:05:25.857909Z",
+  "updated_at": "2026-10-31T18:05:28.298121Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1524,8 +1524,8 @@
       "id": 1711009,
       "slug": "2026-10-31-adab018e-e7c5-4e1d-bb61-a61bf49f5d0a",
       "name": "Round 5: KC vs MKOI",
-      "status": "not_started",
-      "begin_at": "2026-10-31T17:05:00Z",
+      "status": "running",
+      "begin_at": "2026-10-31T17:11:47Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1551,7 +1551,7 @@
           "name": "Karmine Corp",
           "acronym": "KC",
           "slug": "karmine-corp-academy",
-          "score": 0
+          "score": 1
         },
         {
           "id": 126536,
