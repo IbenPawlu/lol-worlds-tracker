@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T16:05:26.744374Z",
+  "updated_at": "2026-10-31T17:05:25.857909Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1525,7 +1525,7 @@
       "slug": "2026-10-31-adab018e-e7c5-4e1d-bb61-a61bf49f5d0a",
       "name": "Round 5: KC vs MKOI",
       "status": "not_started",
-      "begin_at": "2026-10-31T17:00:00Z",
+      "begin_at": "2026-10-31T17:05:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
