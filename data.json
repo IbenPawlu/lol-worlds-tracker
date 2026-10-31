@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T09:35:59.423494Z",
+  "updated_at": "2026-10-31T10:05:27.228449Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1521,53 +1521,11 @@
       ]
     },
     {
-      "id": 1711008,
-      "slug": "2026-10-31-3f2ed3cf-2de6-4ef0-817f-1cb9b0cb4d94",
-      "name": "Round 5: LOS vs LY",
-      "status": "not_started",
-      "begin_at": "2026-10-31T17:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 3,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22047,
-        "name": "Group Stage",
-        "slug": "league-of-legends-world-championship-2026-group-stage"
-      },
-      "opponents": [
-        {
-          "id": 133796,
-          "name": "LOS",
-          "acronym": "LOS",
-          "slug": "los",
-          "score": 0
-        },
-        {
-          "id": 136066,
-          "name": "LYON",
-          "acronym": "LY",
-          "slug": "lyon",
-          "score": 0
-        }
-      ]
-    },
-    {
       "id": 1711009,
       "slug": "2026-10-31-adab018e-e7c5-4e1d-bb61-a61bf49f5d0a",
       "name": "Round 5: KC vs MKOI",
       "status": "not_started",
-      "begin_at": "2026-10-31T20:00:00Z",
+      "begin_at": "2026-10-31T17:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1600,6 +1558,48 @@
           "name": "Movistar KOI",
           "acronym": "MKOI",
           "slug": "mad-lions-league-of-legends",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1711008,
+      "slug": "2026-10-31-3f2ed3cf-2de6-4ef0-817f-1cb9b0cb4d94",
+      "name": "Round 5: LOS vs LY",
+      "status": "not_started",
+      "begin_at": "2026-10-31T20:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 3,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22047,
+        "name": "Group Stage",
+        "slug": "league-of-legends-world-championship-2026-group-stage"
+      },
+      "opponents": [
+        {
+          "id": 133796,
+          "name": "LOS",
+          "acronym": "LOS",
+          "slug": "los",
+          "score": 0
+        },
+        {
+          "id": 136066,
+          "name": "LYON",
+          "acronym": "LY",
+          "slug": "lyon",
           "score": 0
         }
       ]
