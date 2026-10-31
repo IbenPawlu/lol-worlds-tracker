@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T00:05:39.679830Z",
+  "updated_at": "2026-10-31T01:05:27.158638Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1482,8 +1482,134 @@
       "id": 1711006,
       "slug": "2026-10-31-d4b8639d-ef0c-43a3-8a60-a62067e43313",
       "name": "Round 4: HLE vs G2",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-10-30T23:16:03Z",
+      "end_at": "2026-10-31T00:29:49Z",
+      "winner_id": 2883,
+      "number_of_games": 3,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22047,
+        "name": "Group Stage",
+        "slug": "league-of-legends-world-championship-2026-group-stage"
+      },
+      "opponents": [
+        {
+          "id": 2883,
+          "name": "Hanwha Life Esports",
+          "acronym": "HLE",
+          "slug": "hanwha-life-esports",
+          "score": 2
+        },
+        {
+          "id": 88,
+          "name": "G2 Esports",
+          "acronym": "G2",
+          "slug": "g2-esports",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1711008,
+      "slug": "2026-10-31-3f2ed3cf-2de6-4ef0-817f-1cb9b0cb4d94",
+      "name": "Round 5: LOS vs LY",
+      "status": "not_started",
+      "begin_at": "2026-10-31T17:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 3,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22047,
+        "name": "Group Stage",
+        "slug": "league-of-legends-world-championship-2026-group-stage"
+      },
+      "opponents": [
+        {
+          "id": 133796,
+          "name": "LOS",
+          "acronym": "LOS",
+          "slug": "los",
+          "score": 0
+        },
+        {
+          "id": 136066,
+          "name": "LYON",
+          "acronym": "LY",
+          "slug": "lyon",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1711009,
+      "slug": "2026-10-31-adab018e-e7c5-4e1d-bb61-a61bf49f5d0a",
+      "name": "Round 5: KC vs MKOI",
+      "status": "not_started",
+      "begin_at": "2026-10-31T20:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 3,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22047,
+        "name": "Group Stage",
+        "slug": "league-of-legends-world-championship-2026-group-stage"
+      },
+      "opponents": [
+        {
+          "id": 134078,
+          "name": "Karmine Corp",
+          "acronym": "KC",
+          "slug": "karmine-corp-academy",
+          "score": 0
+        },
+        {
+          "id": 126536,
+          "name": "Movistar KOI",
+          "acronym": "MKOI",
+          "slug": "mad-lions-league-of-legends",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1711010,
+      "slug": "2026-11-01",
+      "name": "Round 5: HLE vs BLG",
+      "status": "not_started",
+      "begin_at": "2026-10-31T23:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 3,
@@ -1509,97 +1635,16 @@
           "name": "Hanwha Life Esports",
           "acronym": "HLE",
           "slug": "hanwha-life-esports",
-          "score": 1
+          "score": 0
         },
         {
-          "id": 88,
-          "name": "G2 Esports",
-          "acronym": "G2",
-          "slug": "g2-esports",
+          "id": 1566,
+          "name": "Bilibili Gaming",
+          "acronym": "BLG",
+          "slug": "bilibili-gaming",
           "score": 0
         }
       ]
-    },
-    {
-      "id": 1711008,
-      "slug": "2026-10-31-3f2ed3cf-2de6-4ef0-817f-1cb9b0cb4d94",
-      "name": "Round 5: TBD vs TBD",
-      "status": "not_started",
-      "begin_at": "2026-10-31T17:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 3,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22047,
-        "name": "Group Stage",
-        "slug": "league-of-legends-world-championship-2026-group-stage"
-      },
-      "opponents": []
-    },
-    {
-      "id": 1711009,
-      "slug": "2026-10-31-adab018e-e7c5-4e1d-bb61-a61bf49f5d0a",
-      "name": "Round 5: TBD vs TBD",
-      "status": "not_started",
-      "begin_at": "2026-10-31T20:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 3,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22047,
-        "name": "Group Stage",
-        "slug": "league-of-legends-world-championship-2026-group-stage"
-      },
-      "opponents": []
-    },
-    {
-      "id": 1711010,
-      "slug": "2026-11-01",
-      "name": "Round 5: TBD vs TBD",
-      "status": "not_started",
-      "begin_at": "2026-10-31T23:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 3,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22047,
-        "name": "Group Stage",
-        "slug": "league-of-legends-world-championship-2026-group-stage"
-      },
-      "opponents": []
     },
     {
       "id": 1711013,
