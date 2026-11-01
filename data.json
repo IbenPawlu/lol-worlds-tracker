@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T01:05:27.168547Z",
+  "updated_at": "2026-11-01T02:05:26.646065Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1647,11 +1647,95 @@
       ]
     },
     {
+      "id": 1711018,
+      "slug": "2026-11-06",
+      "name": "Quarterfinal 4: TES vs IG",
+      "status": "not_started",
+      "begin_at": "2026-11-03T22:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 5,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22048,
+        "name": "Playoffs",
+        "slug": "league-of-legends-world-championship-2026-playoffs"
+      },
+      "opponents": [
+        {
+          "id": 126059,
+          "name": "Top Esports",
+          "acronym": "TES",
+          "slug": "top-esports",
+          "score": 0
+        },
+        {
+          "id": 411,
+          "name": "Invictus Gaming",
+          "acronym": "IG",
+          "slug": "invictus-gaming",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "id": 1711017,
+      "slug": "2026-11-05",
+      "name": "Quarterfinal 3: GEN vs LY",
+      "status": "not_started",
+      "begin_at": "2026-11-04T22:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 5,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22048,
+        "name": "Playoffs",
+        "slug": "league-of-legends-world-championship-2026-playoffs"
+      },
+      "opponents": [
+        {
+          "id": 2882,
+          "name": "Gen.G",
+          "acronym": "GEN",
+          "slug": "geng",
+          "score": 0
+        },
+        {
+          "id": 136066,
+          "name": "LYON",
+          "acronym": "LY",
+          "slug": "lyon",
+          "score": 0
+        }
+      ]
+    },
+    {
       "id": 1711013,
       "slug": "2026-11-03",
       "name": "Quarterfinal 1: DK vs BLG",
       "status": "not_started",
-      "begin_at": "2026-11-03T22:00:00Z",
+      "begin_at": "2026-11-05T22:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -1693,7 +1777,7 @@
       "slug": "2026-11-04",
       "name": "Quarterfinal 2: KC vs T1",
       "status": "not_started",
-      "begin_at": "2026-11-04T22:00:00Z",
+      "begin_at": "2026-11-06T22:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -1726,90 +1810,6 @@
           "name": "T1",
           "acronym": "T1",
           "slug": "t1",
-          "score": 0
-        }
-      ]
-    },
-    {
-      "id": 1711017,
-      "slug": "2026-11-05",
-      "name": "Quarterfinal 3: GEN vs LY",
-      "status": "not_started",
-      "begin_at": "2026-11-05T22:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 5,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22048,
-        "name": "Playoffs",
-        "slug": "league-of-legends-world-championship-2026-playoffs"
-      },
-      "opponents": [
-        {
-          "id": 2882,
-          "name": "Gen.G",
-          "acronym": "GEN",
-          "slug": "geng",
-          "score": 0
-        },
-        {
-          "id": 136066,
-          "name": "LYON",
-          "acronym": "LY",
-          "slug": "lyon",
-          "score": 0
-        }
-      ]
-    },
-    {
-      "id": 1711018,
-      "slug": "2026-11-06",
-      "name": "Quarterfinal 4: TES vs IG",
-      "status": "not_started",
-      "begin_at": "2026-11-06T22:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 5,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22048,
-        "name": "Playoffs",
-        "slug": "league-of-legends-world-championship-2026-playoffs"
-      },
-      "opponents": [
-        {
-          "id": 126059,
-          "name": "Top Esports",
-          "acronym": "TES",
-          "slug": "top-esports",
-          "score": 0
-        },
-        {
-          "id": 411,
-          "name": "Invictus Gaming",
-          "acronym": "IG",
-          "slug": "invictus-gaming",
           "score": 0
         }
       ]
