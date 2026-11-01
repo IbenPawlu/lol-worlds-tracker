@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T00:05:28.986435Z",
+  "updated_at": "2026-11-01T01:05:27.168547Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1775,7 +1775,7 @@
     {
       "id": 1711018,
       "slug": "2026-11-06",
-      "name": "Quarterfinal 4: TBD vs TBD",
+      "name": "Quarterfinal 4: TES vs IG",
       "status": "not_started",
       "begin_at": "2026-11-06T22:00:00Z",
       "end_at": null,
@@ -1797,7 +1797,22 @@
         "name": "Playoffs",
         "slug": "league-of-legends-world-championship-2026-playoffs"
       },
-      "opponents": []
+      "opponents": [
+        {
+          "id": 126059,
+          "name": "Top Esports",
+          "acronym": "TES",
+          "slug": "top-esports",
+          "score": 0
+        },
+        {
+          "id": 411,
+          "name": "Invictus Gaming",
+          "acronym": "IG",
+          "slug": "invictus-gaming",
+          "score": 0
+        }
+      ]
     },
     {
       "id": 1711019,
