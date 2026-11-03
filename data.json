@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T22:05:30.022670Z",
+  "updated_at": "2026-11-03T23:05:27.415318Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1650,8 +1650,8 @@
       "id": 1711018,
       "slug": "2026-11-06",
       "name": "Quarterfinal 4: TES vs IG",
-      "status": "not_started",
-      "begin_at": "2026-11-03T22:10:00Z",
+      "status": "running",
+      "begin_at": "2026-11-03T22:09:23Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -1684,7 +1684,7 @@
           "name": "Invictus Gaming",
           "acronym": "IG",
           "slug": "invictus-gaming",
-          "score": 0
+          "score": 1
         }
       ]
     },
