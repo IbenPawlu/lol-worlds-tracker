@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T21:05:30.660568Z",
+  "updated_at": "2026-11-03T22:05:30.022670Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1651,7 +1651,7 @@
       "slug": "2026-11-06",
       "name": "Quarterfinal 4: TES vs IG",
       "status": "not_started",
-      "begin_at": "2026-11-03T22:00:00Z",
+      "begin_at": "2026-11-03T22:10:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
