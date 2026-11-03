@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T23:05:27.415318Z",
+  "updated_at": "2026-11-03T23:57:56.438446Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1677,7 +1677,7 @@
           "name": "Top Esports",
           "acronym": "TES",
           "slug": "top-esports",
-          "score": 0
+          "score": 1
         },
         {
           "id": 411,
