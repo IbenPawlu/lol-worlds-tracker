@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-05T21:05:31.055531Z",
+  "updated_at": "2026-11-05T22:05:28.368670Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1735,7 +1735,7 @@
       "slug": "2026-11-03",
       "name": "Quarterfinal 1: DK vs BLG",
       "status": "not_started",
-      "begin_at": "2026-11-05T22:00:00Z",
+      "begin_at": "2026-11-05T22:10:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
