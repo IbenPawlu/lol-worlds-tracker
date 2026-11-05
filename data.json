@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-04T23:05:28.898238Z",
+  "updated_at": "2026-11-05T00:05:30.916268Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1719,7 +1719,7 @@
           "name": "Gen.G",
           "acronym": "GEN",
           "slug": "geng",
-          "score": 1
+          "score": 2
         },
         {
           "id": 136066,
@@ -1815,38 +1815,11 @@
       ]
     },
     {
-      "id": 1711019,
-      "slug": "2026-11-07",
-      "name": "Semifinal 1: TBD vs TBD",
-      "status": "not_started",
-      "begin_at": "2026-11-07T22:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 5,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22048,
-        "name": "Playoffs",
-        "slug": "league-of-legends-world-championship-2026-playoffs"
-      },
-      "opponents": []
-    },
-    {
       "id": 1711020,
       "slug": "2026-11-08",
       "name": "Semifinal 2: IG vs TBD",
       "status": "not_started",
-      "begin_at": "2026-11-08T22:00:00Z",
+      "begin_at": "2026-11-07T22:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -1875,6 +1848,33 @@
           "score": 0
         }
       ]
+    },
+    {
+      "id": 1711019,
+      "slug": "2026-11-07",
+      "name": "Semifinal 1: TBD vs TBD",
+      "status": "not_started",
+      "begin_at": "2026-11-08T22:00:00Z",
+      "end_at": null,
+      "winner_id": null,
+      "number_of_games": 5,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22048,
+        "name": "Playoffs",
+        "slug": "league-of-legends-world-championship-2026-playoffs"
+      },
+      "opponents": []
     },
     {
       "id": 1711021,
