@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-05T22:05:28.368670Z",
+  "updated_at": "2026-11-05T23:05:29.097907Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1734,8 +1734,8 @@
       "id": 1711013,
       "slug": "2026-11-03",
       "name": "Quarterfinal 1: DK vs BLG",
-      "status": "not_started",
-      "begin_at": "2026-11-05T22:10:00Z",
+      "status": "running",
+      "begin_at": "2026-11-05T22:08:37Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -1768,7 +1768,7 @@
           "name": "Bilibili Gaming",
           "acronym": "BLG",
           "slug": "bilibili-gaming",
-          "score": 0
+          "score": 1
         }
       ]
     },
