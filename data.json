@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T22:05:29.766714Z",
+  "updated_at": "2026-11-06T23:05:32.796658Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1776,8 +1776,8 @@
       "id": 1711016,
       "slug": "2026-11-04",
       "name": "Quarterfinal 2: KC vs T1",
-      "status": "not_started",
-      "begin_at": "2026-11-06T22:05:00Z",
+      "status": "running",
+      "begin_at": "2026-11-06T22:07:11Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -1810,7 +1810,7 @@
           "name": "T1",
           "acronym": "T1",
           "slug": "t1",
-          "score": 0
+          "score": 1
         }
       ]
     },
