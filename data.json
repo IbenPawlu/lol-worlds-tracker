@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T22:05:28.200925Z",
+  "updated_at": "2026-11-07T22:43:33.484488Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1818,8 +1818,8 @@
       "id": 1711020,
       "slug": "invictus-gaming-2026-11-07",
       "name": "Semifinal 2: IG vs GEN",
-      "status": "not_started",
-      "begin_at": "2026-11-07T22:05:00Z",
+      "status": "running",
+      "begin_at": "2026-11-07T22:07:51Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
