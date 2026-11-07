@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T23:05:32.796658Z",
+  "updated_at": "2026-11-07T00:05:31.990390Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1810,7 +1810,7 @@
           "name": "T1",
           "acronym": "T1",
           "slug": "t1",
-          "score": 1
+          "score": 2
         }
       ]
     },
