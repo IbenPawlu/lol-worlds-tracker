@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T00:05:31.990390Z",
+  "updated_at": "2026-11-07T00:55:03.613959Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1803,7 +1803,7 @@
           "name": "Karmine Corp",
           "acronym": "KC",
           "slug": "karmine-corp-academy",
-          "score": 0
+          "score": 1
         },
         {
           "id": 126061,
