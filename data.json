@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-08T22:05:31.648276Z",
+  "updated_at": "2026-11-08T23:05:30.235284Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1860,8 +1860,8 @@
       "id": 1711019,
       "slug": "bilibili-gaming-2026-11-08",
       "name": "Semifinal 1: BLG vs T1",
-      "status": "not_started",
-      "begin_at": "2026-11-08T22:10:00Z",
+      "status": "running",
+      "begin_at": "2026-11-08T22:07:29Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -1887,7 +1887,7 @@
           "name": "Bilibili Gaming",
           "acronym": "BLG",
           "slug": "bilibili-gaming",
-          "score": 0
+          "score": 1
         },
         {
           "id": 126061,
