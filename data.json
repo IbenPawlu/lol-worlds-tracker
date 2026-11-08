@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T23:05:27.428401Z",
+  "updated_at": "2026-11-08T00:05:30.270244Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1852,7 +1852,7 @@
           "name": "Gen.G",
           "acronym": "GEN",
           "slug": "geng",
-          "score": 1
+          "score": 2
         }
       ]
     },
