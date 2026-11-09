@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T01:05:28.976996Z",
+  "updated_at": "2026-11-09T02:05:28.466576Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1860,8 +1860,50 @@
       "id": 1711019,
       "slug": "bilibili-gaming-2026-11-08",
       "name": "Semifinal 1: BLG vs T1",
-      "status": "running",
+      "status": "finished",
       "begin_at": "2026-11-08T22:07:29Z",
+      "end_at": "2026-11-09T01:35:44Z",
+      "winner_id": 1566,
+      "number_of_games": 5,
+      "league": {
+        "id": 297,
+        "name": "Worlds",
+        "slug": "league-of-legends-world-championship"
+      },
+      "serie": {
+        "id": 11014,
+        "name": "",
+        "full_name": "2026",
+        "year": 2026
+      },
+      "tournament": {
+        "id": 22048,
+        "name": "Playoffs",
+        "slug": "league-of-legends-world-championship-2026-playoffs"
+      },
+      "opponents": [
+        {
+          "id": 1566,
+          "name": "Bilibili Gaming",
+          "acronym": "BLG",
+          "slug": "bilibili-gaming",
+          "score": 3
+        },
+        {
+          "id": 126061,
+          "name": "T1",
+          "acronym": "T1",
+          "slug": "t1",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "id": 1711021,
+      "slug": "gen-g-2026-11-14",
+      "name": "Grand Final: BLG vs GEN",
+      "status": "not_started",
+      "begin_at": "2026-11-14T19:00:00Z",
       "end_at": null,
       "winner_id": null,
       "number_of_games": 5,
@@ -1887,43 +1929,8 @@
           "name": "Bilibili Gaming",
           "acronym": "BLG",
           "slug": "bilibili-gaming",
-          "score": 2
+          "score": 0
         },
-        {
-          "id": 126061,
-          "name": "T1",
-          "acronym": "T1",
-          "slug": "t1",
-          "score": 1
-        }
-      ]
-    },
-    {
-      "id": 1711021,
-      "slug": "2026-11-14",
-      "name": "Grand Final: GEN vs TBD",
-      "status": "not_started",
-      "begin_at": "2026-11-14T19:00:00Z",
-      "end_at": null,
-      "winner_id": null,
-      "number_of_games": 5,
-      "league": {
-        "id": 297,
-        "name": "Worlds",
-        "slug": "league-of-legends-world-championship"
-      },
-      "serie": {
-        "id": 11014,
-        "name": "",
-        "full_name": "2026",
-        "year": 2026
-      },
-      "tournament": {
-        "id": 22048,
-        "name": "Playoffs",
-        "slug": "league-of-legends-world-championship-2026-playoffs"
-      },
-      "opponents": [
         {
           "id": 2882,
           "name": "Gen.G",
