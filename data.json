@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T00:05:32.099028Z",
+  "updated_at": "2026-11-09T00:52:13.915539Z",
   "source": "PandaScore",
   "series": {
     "id": 11014,
@@ -1887,7 +1887,7 @@
           "name": "Bilibili Gaming",
           "acronym": "BLG",
           "slug": "bilibili-gaming",
-          "score": 1
+          "score": 2
         },
         {
           "id": 126061,
